@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nurhaliza Farm's - Dashboard Monitoring</title>
+    <title>Nadz Farm's - Dashboard Monitoring</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -11,29 +11,15 @@
             darkMode: 'class',
             theme: {
                 extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                    colors: {
-                        brand: {
-                            50: '#f0fdf4',
-                            100: '#dcfce7',
-                            500: '#22c55e',
-                            600: '#16a34a',
-                            700: '#15803d',
-                        }
-                    }
+                    fontFamily: { sans: ['Inter', 'sans-serif'], },
+                    colors: { brand: { 50: '#f0fdf4', 100: '#dcfce7', 500: '#22c55e', 600: '#16a34a', 700: '#15803d', } }
                 }
             }
         }
     </script>
-    <!-- Google Fonts Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Chart.js CDN -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        body { font-family: 'Inter', sans-serif; }
-    </style>
+    <style> body { font-family: 'Inter', sans-serif; } </style>
 </head>
 <body class="bg-slate-100 dark:bg-slate-950 text-slate-800 dark:text-slate-100 min-h-screen transition-colors duration-200 antialiased">
 
@@ -43,7 +29,7 @@
         <header class="flex flex-col sm:flex-row justify-between items-start sm:items-center bg-white dark:bg-slate-900 p-5 rounded-2xl shadow-sm border border-slate-200/80 dark:border-slate-800 gap-4">
             <div class="space-y-0.5">
                 <span class="text-[11px] font-semibold tracking-wider uppercase text-emerald-600 dark:text-emerald-400">Monitoring System</span>
-                <h1 class="text-xl sm:text-2xl font-bold tracking-tight">Nurhaliza Farm's</h1>
+                <h1 class="text-xl sm:text-2xl font-bold tracking-tight">Nadz Farm's</h1>
             </div>
             <div class="flex items-center gap-3 flex-wrap w-full sm:w-auto justify-between sm:justify-end">
                 <div class="flex items-center gap-2 bg-slate-50 dark:bg-slate-800 px-3 py-1.5 rounded-full border border-slate-200 dark:border-slate-700 text-xs font-medium">
@@ -57,33 +43,24 @@
             </div>
         </header>
 
-        <!-- FILTER BAR -->
+        <!-- FILTER BAR (DIUPDATE UNTUK SIKLUS) -->
         <section class="bg-white dark:bg-slate-900 p-5 rounded-2xl shadow-sm border border-slate-200/80 dark:border-slate-800 space-y-4">
             <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 pb-3">
-                <h2 class="text-xs font-bold uppercase tracking-wider text-slate-400">Filter Data</h2>
-                <button onclick="resetFilter()" class="text-xs font-semibold text-slate-500 hover:text-emerald-600 dark:hover:text-emerald-400 transition">Reset Filter</button>
+                <h2 class="text-xs font-bold uppercase tracking-wider text-slate-400">Filter Berdasarkan Siklus</h2>
+                <button onclick="loadAllData()" class="text-xs font-semibold text-slate-500 hover:text-emerald-600 dark:hover:text-emerald-400 transition">Refresh Data</button>
             </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 items-end">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 items-end">
                 <div>
-                    <label class="block text-xs font-medium text-slate-500 dark:text-slate-400 mb-1.5">Periode</label>
-                    <select id="filterPeriod" onchange="applyFilters()" class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs rounded-xl px-3 py-2.5 focus:ring-2 focus:ring-emerald-500 focus:outline-none transition">
-                        <option value="all">Semua Waktu</option>
-                        <option value="daily">Harian</option>
-                        <option value="monthly">Bulanan</option>
-                        <option value="yearly">Tahunan</option>
+                    <label class="block text-xs font-medium text-slate-500 dark:text-slate-400 mb-1.5">Pilih Periode / Siklus</label>
+                    <select id="filterPeriode" onchange="applyFilters()" class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm font-semibold text-emerald-700 dark:text-emerald-400 rounded-xl px-3 py-2.5 focus:ring-2 focus:ring-emerald-500 focus:outline-none transition">
+                        <option value="all">-- Tampilkan Semua Siklus --</option>
+                        <!-- Opsi ini akan otomatis terisi oleh script JS di bawah -->
                     </select>
                 </div>
                 <div>
-                    <label class="block text-xs font-medium text-slate-500 dark:text-slate-400 mb-1.5">Dari Tanggal</label>
-                    <input type="date" id="filterStart" onchange="applyFilters()" class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs rounded-xl px-3 py-2.5 focus:ring-2 focus:ring-emerald-500 focus:outline-none transition">
-                </div>
-                <div>
-                    <label class="block text-xs font-medium text-slate-500 dark:text-slate-400 mb-1.5">Sampai Tanggal</label>
-                    <input type="date" id="filterEnd" onchange="applyFilters()" class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs rounded-xl px-3 py-2.5 focus:ring-2 focus:ring-emerald-500 focus:outline-none transition">
-                </div>
-                <div>
-                    <label class="block text-xs font-medium text-slate-500 dark:text-slate-400 mb-1.5">Populasi Awal (ekor)</label>
-                    <input type="number" id="filterPopulasi" value="20000" min="1" onchange="applyFilters()" class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs rounded-xl px-3 py-2.5 focus:ring-2 focus:ring-emerald-500 focus:outline-none transition">
+                    <label class="block text-xs font-medium text-slate-500 dark:text-slate-400 mb-1.5">Populasi Awal (Ekor)</label>
+                    <!-- Pastikan ini diubah secara manual jika beda siklus beda populasi -->
+                    <input type="number" id="filterPopulasi" value="20000" min="1" onchange="applyFilters()" class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm rounded-xl px-3 py-2.5 focus:ring-2 focus:ring-emerald-500 focus:outline-none transition">
                 </div>
             </div>
         </section>
@@ -101,7 +78,7 @@
             <!-- 6 KPI CARDS -->
             <div class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
                 <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl shadow-sm border border-slate-200/80 dark:border-slate-800 space-y-1">
-                    <p class="text-[11px] font-medium uppercase tracking-wider text-slate-400">Usia</p>
+                    <p class="text-[11px] font-medium uppercase tracking-wider text-slate-400">Usia (Max)</p>
                     <h3 id="kpiUsia" class="text-xl sm:text-2xl font-bold tracking-tight">0 Hari</h3>
                 </div>
                 <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl shadow-sm border border-slate-200/80 dark:border-slate-800 space-y-1">
@@ -130,37 +107,36 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <!-- Line Chart ABW per Usia -->
                 <div class="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-sm border border-slate-200/80 dark:border-slate-800">
-                    <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-4">Line Chart ABW per Usia</h3>
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-4">Grafik ABW per Usia</h3>
                     <div class="relative h-72">
                         <canvas id="abwChart"></canvas>
                     </div>
                 </div>
                 <!-- Bar Chart Mortalitas -->
                 <div class="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-sm border border-slate-200/80 dark:border-slate-800">
-                    <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-4">Bar Chart Mortalitas</h3>
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-4">Grafik Mortalitas Harian</h3>
                     <div class="relative h-72">
                         <canvas id="chartMortalitas"></canvas>
                     </div>
                 </div>
                 <!-- Bar Chart Pakan -->
                 <div class="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-sm border border-slate-200/80 dark:border-slate-800">
-                    <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-4">Bar Chart Pakan</h3>
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-4">Grafik Konsumsi Pakan</h3>
                     <div class="relative h-72">
                         <canvas id="pakanChart"></canvas>
                     </div>
                 </div>
                 <!-- Pie Chart Sumber Pakan -->
                 <div class="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-sm border border-slate-200/80 dark:border-slate-800">
-                    <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-4">Pie Chart Sumber Pakan</h3>
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-4">Distribusi Sumber Pakan</h3>
                     <div class="relative h-72 flex justify-center">
                         <canvas id="chartSumberPakan"></canvas>
                     </div>
                 </div>
             </div>
-
             <!-- Line Chart Kematian per Jam -->
             <div class="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-sm border border-slate-200/80 dark:border-slate-800">
-                <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-4">Line Chart Kematian per Jam (akumulasi periode terfilter)</h3>
+                <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-4">Akumulasi Kematian per Jam (Dalam 1 Siklus)</h3>
                 <div class="relative h-72">
                     <canvas id="chartPerJam"></canvas>
                 </div>
@@ -190,7 +166,7 @@
         <!-- TAB CONTENT: DOKUMENTASI -->
         <div id="tab-dokumentasi" class="hidden space-y-6">
             <div class="bg-white dark:bg-slate-900 p-6 rounded-2xl shadow-sm border border-slate-200/80 dark:border-slate-800 space-y-4">
-                <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400">Galeri Dokumentasi Foto</h3>
+                <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400">Galeri Dokumentasi</h3>
                 <div id="galleryGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4"></div>
             </div>
         </div>
@@ -205,80 +181,39 @@
 
     <!-- SCRIPT APLIKASI -->
     <script>
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx7yoQqfPcs56RzGM5hpWqoDK4tPdXc0DyiwQ8FdQZI9XqOyUj5Wg1hIQP8RqosJe-Y/exec';
+        // GANTI DENGAN LINK DEPLOYMENT APPS SCRIPT ANDA
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbySJ652QhhbZwSo1uBlFasn-J4548L2u0csqbstoNRl9Ga3TrNvuCkyVaWoXDbvXkHv/exec';
         let allData = [];
-        let abwChartInstance = null;
-        let pakanChartInstance = null;
-        let chartMortalitasInstance = null;
-        let chartSumberPakanInstance = null;
-        let chartPerJamInstance = null;
+        let allPeriods = new Set();
+        let abwChartInstance = null; let pakanChartInstance = null; let chartMortalitasInstance = null; let chartSumberPakanInstance = null; let chartPerJamInstance = null;
 
-        // ---------- UTIL: escape teks sebelum masuk ke innerHTML (anti-XSS) ----------
         function escapeHtml(str) {
             if (str === null || str === undefined) return '';
-            return String(str)
-                .replace(/&/g, '&amp;')
-                .replace(/</g, '&lt;')
-                .replace(/>/g, '&gt;')
-                .replace(/"/g, '&quot;')
-                .replace(/'/g, '&#039;');
+            return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
         }
-
-        // ---------- UTIL: ubah link Google Drive apa pun jadi link thumbnail yang bisa dipasang di <img> ----------
         function driveThumbnail(url, size) {
             if (!url) return '';
-            // Cocokkan ID file Drive (biasanya 25+ karakter alfanumerik/-/_)
             const match = url.match(/[-\w]{25,}/);
             if (!match) return url;
             return 'https://drive.google.com/thumbnail?id=' + match[0] + '&sz=w' + (size || 400);
         }
-
         function updateTime() {
             const now = new Date();
-            document.getElementById('currentTime').textContent = now.toLocaleDateString('id-ID', {
-                weekday: 'short', day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit'
-            });
-        }
-        updateTime();
-        setInterval(updateTime, 1000);
-
-        async function checkStatus() {
-            try {
-                await fetch(SCRIPT_URL, { method: 'GET', mode: 'no-cors' });
-                document.getElementById('statusDot').className = 'w-2 h-2 rounded-full bg-emerald-500 animate-pulse';
-                document.getElementById('statusText').textContent = 'Online';
-            } catch (_) {
-                document.getElementById('statusDot').className = 'w-2 h-2 rounded-full bg-rose-500';
-                document.getElementById('statusText').textContent = 'Offline';
-            }
-        }
-        checkStatus();
-        setInterval(checkStatus, 30000);
+            document.getElementById('currentTime').textContent = now.toLocaleDateString('id-ID', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' });
+        } updateTime(); setInterval(updateTime, 1000);
 
         function toggleDarkMode() {
             const html = document.documentElement;
-            if (html.classList.contains('dark')) {
-                html.classList.remove('dark');
-                localStorage.theme = 'light';
-            } else {
-                html.classList.add('dark');
-                localStorage.theme = 'dark';
-            }
+            if (html.classList.contains('dark')) { html.classList.remove('dark'); localStorage.theme = 'light'; } 
+            else { html.classList.add('dark'); localStorage.theme = 'dark'; }
             updateThemeIcon();
         }
-
         function updateThemeIcon() {
-            const isDark = document.documentElement.classList.contains('dark');
             const icon = document.getElementById('themeIcon');
-            if (isDark) {
-                icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>';
-            } else {
-                icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>';
-            }
+            if (document.documentElement.classList.contains('dark')) icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>';
+            else icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>';
         }
-        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark');
-        }
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) document.documentElement.classList.add('dark');
         updateThemeIcon();
 
         function switchTab(tabName) {
@@ -296,119 +231,80 @@
             return d.toLocaleDateString('id-ID', { day:'2-digit', month:'short', year:'numeric' });
         }
 
-        function resetFilter() {
-            document.getElementById('filterPeriod').value = 'all';
-            document.getElementById('filterStart').value = '';
-            document.getElementById('filterEnd').value = '';
-            document.getElementById('filterPopulasi').value = '20000';
-            applyFilters();
-        }
-
-        function openModal(src) {
-            document.getElementById('modalImage').src = src;
-            document.getElementById('photoModal').classList.remove('hidden');
-        }
-
-        function closeModal() {
-            document.getElementById('photoModal').classList.add('hidden');
-        }
+        function openModal(src) { document.getElementById('modalImage').src = src; document.getElementById('photoModal').classList.remove('hidden'); }
+        function closeModal() { document.getElementById('photoModal').classList.add('hidden'); }
 
         async function loadAllData() {
             try {
                 let url = SCRIPT_URL + '?action=getAll';
                 const resp = await fetch(url);
                 if (!resp.ok) throw new Error('Gagal mengambil data');
-
                 const result = await resp.json();
+                
                 if (result.status === 'success') {
                     allData = result.data || [];
+                    extractPeriods();
                     applyFilters();
                 } else {
                     throw new Error(result.message || 'Data kosong');
                 }
             } catch (err) {
                 console.error(err);
-                document.getElementById('tableContent').innerHTML = `
-                    <div class="text-center py-8 text-rose-500">
-                        <h3 class="font-bold text-xs">Gagal Memuat Data</h3>
-                        <p class="text-[11px] mt-1">${escapeHtml(err.message)}</p>
-                    </div>
-                `;
+                document.getElementById('tableContent').innerHTML = `<div class="text-center py-8 text-rose-500"><h3 class="font-bold text-xs">Gagal Memuat Data</h3><p class="text-[11px] mt-1">${escapeHtml(err.message)}</p></div>`;
             }
         }
 
-        function applyFilters() {
-            const period = document.getElementById('filterPeriod').value;
-            const start = document.getElementById('filterStart').value;
-            const end = document.getElementById('filterEnd').value;
-
-            let filtered = allData.filter(row => {
-                let matchDate = true;
-
-                if (row.tanggal) {
-                    let rowDateStr = row.tanggal.split('T')[0];
-                    if (start && rowDateStr < start) matchDate = false;
-                    if (end && rowDateStr > end) matchDate = false;
-
-                    if (period === 'daily') {
-                        let todayStr = new Date().toISOString().split('T')[0];
-                        if (rowDateStr !== todayStr) matchDate = false;
-                    } else if (period === 'monthly') {
-                        let currentMonth = new Date().toISOString().slice(0, 7);
-                        if (!rowDateStr.startsWith(currentMonth)) matchDate = false;
-                    } else if (period === 'yearly') {
-                        let currentYear = new Date().getFullYear().toString();
-                        if (!rowDateStr.startsWith(currentYear)) matchDate = false;
-                    }
-                }
-
-                return matchDate;
+        function extractPeriods() {
+            allPeriods.clear();
+            allData.forEach(row => { if (row.id_periode) allPeriods.add(row.id_periode); });
+            
+            const select = document.getElementById('filterPeriode');
+            const currentVal = select.value;
+            select.innerHTML = '<option value="all">-- Tampilkan Semua Siklus --</option>';
+            
+            Array.from(allPeriods).sort().forEach(p => {
+                const opt = document.createElement('option');
+                opt.value = p; opt.textContent = p;
+                select.appendChild(opt);
             });
+            
+            if (allPeriods.has(currentVal)) select.value = currentVal;
+            else if (allPeriods.size > 0) select.value = Array.from(allPeriods).sort().pop(); // Pilih siklus terbaru otomatis
+        }
 
+        function applyFilters() {
+            const period = document.getElementById('filterPeriode').value;
+            let filtered = allData.filter(row => {
+                if (period === 'all') return true;
+                return row.id_periode === period;
+            });
             renderDashboard(filtered);
         }
 
         function renderDashboard(data) {
             if (!data || data.length === 0) {
-                updateStats([]);
-                updateCharts([]);
-                document.getElementById('tableContent').innerHTML = `<div class="text-center py-8 text-slate-400 text-xs">Tidak ada data</div>`;
+                updateStats([]); updateCharts([]);
+                document.getElementById('tableContent').innerHTML = `<div class="text-center py-8 text-slate-400 text-xs">Tidak ada data untuk siklus ini</div>`;
                 document.getElementById('tablePakanContent').innerHTML = `<div class="text-center py-8 text-slate-400 text-xs">Tidak ada data</div>`;
                 document.getElementById('galleryGrid').innerHTML = `<div class="col-span-full text-center py-8 text-slate-400 text-xs">Tidak ada foto</div>`;
                 return;
             }
-
-            updateStats(data);
-            updateCharts(data);
-            renderTable(data);
-            renderGallery(data);
+            updateStats(data); updateCharts(data); renderTable(data); renderGallery(data);
         }
 
         function updateStats(data) {
-            let totalPakan = 0;
-            let totalMati = 0;
-            let abwValues = [];
-            let maxUsia = 0;
+            let totalPakan = 0; let totalMati = 0; let abwValues = []; let maxUsia = 0;
 
             data.forEach(row => {
                 totalPakan += parseFloat(row.jumlah_kg) || 0;
                 totalMati += parseInt(row.jumlah_mati) || 0;
-                // FIX: backend mengirim field "umur_hari", bukan "usia"
                 if (row.umur_hari && parseInt(row.umur_hari) > maxUsia) maxUsia = parseInt(row.umur_hari);
 
-                const abw1 = parseFloat(row.abw_sekat1) || 0;
-                const abw2 = parseFloat(row.abw_sekat2) || 0;
-                const abw3 = parseFloat(row.abw_sekat3) || 0;
-                const abw4 = parseFloat(row.abw_sekat4) || 0;
-                const vals = [abw1, abw2, abw3, abw4].filter(v => v > 0);
-                if (vals.length > 0) {
-                    abwValues.push(vals.reduce((a,b) => a+b, 0) / vals.length);
-                }
+                const vals = [parseFloat(row.abw_sekat1), parseFloat(row.abw_sekat2), parseFloat(row.abw_sekat3), parseFloat(row.abw_sekat4)].filter(v => v > 0);
+                if (vals.length > 0) abwValues.push(vals.reduce((a,b) => a+b, 0) / vals.length);
             });
 
             const avgAbw = abwValues.length > 0 ? (abwValues.reduce((a,b) => a+b, 0) / abwValues.length).toFixed(1) : 0;
-
-            // FIX: populasi awal sekarang bisa diatur dari filter bar, bukan hardcode
             let popAwal = parseFloat(document.getElementById('filterPopulasi').value) || 20000;
             let mortalitasPct = ((totalMati / popAwal) * 100).toFixed(2);
             let ip = (avgAbw > 0 && maxUsia > 0) ? Math.round(( (100 - mortalitasPct) * avgAbw ) / (maxUsia * 1.5 * 100)) : 0;
@@ -423,43 +319,32 @@
 
         function renderTable(data) {
             const sorted = [...data].sort((a,b) => new Date(b.tanggal || '1970-01-01') - new Date(a.tanggal || '1970-01-01'));
+            
+            let html = `<table class="w-full text-left text-xs border-collapse"><thead>
+                <tr class="text-slate-400 font-semibold border-b border-slate-100 dark:border-slate-800 uppercase tracking-wider text-[11px]">
+                    <th class="py-3 px-2">Tanggal</th><th class="py-3 px-2">Siklus</th><th class="py-3 px-2">Usia</th><th class="py-3 px-2">ABW Sekat (1-4)</th><th class="py-3 px-2">Pakan (Atas/Bawah)</th><th class="py-3 px-2">Total Mati</th>
+                </tr></thead><tbody class="divide-y divide-slate-100 dark:divide-slate-800 text-slate-600 dark:text-slate-300">`;
 
-            let html = `<table class="w-full text-left text-xs border-collapse">
-                <thead>
-                    <tr class="text-slate-400 font-semibold border-b border-slate-100 dark:border-slate-800 uppercase tracking-wider text-[11px]">
-                        <th class="py-3 px-2">Tanggal</th>
-                        <th class="py-3 px-2">Usia</th>
-                        <th class="py-3 px-2">ABW Sekat (1-4)</th>
-                        <th class="py-3 px-2">Pakan (Atas/Bawah)</th>
-                        <th class="py-3 px-2">Total Mati</th>
-                    </tr>
-                </thead>
-                <tbody class="divide-y divide-slate-100 dark:divide-slate-800 text-slate-600 dark:text-slate-300">`;
-
-            let pakanHtml = `<table class="w-full text-left text-xs border-collapse">
-                <thead>
-                    <tr class="text-slate-400 font-semibold border-b border-slate-100 dark:border-slate-800 uppercase tracking-wider text-[11px]">
-                        <th class="py-3 px-2">Tanggal</th>
-                        <th class="py-3 px-2">Sumber Pakan</th>
-                        <th class="py-3 px-2">Jumlah Zak</th>
-                        <th class="py-3 px-2">Jumlah Kg</th>
-                    </tr>
-                </thead>
-                <tbody class="divide-y divide-slate-100 dark:divide-slate-800 text-slate-600 dark:text-slate-300">`;
+            let pakanHtml = `<table class="w-full text-left text-xs border-collapse"><thead>
+                <tr class="text-slate-400 font-semibold border-b border-slate-100 dark:border-slate-800 uppercase tracking-wider text-[11px]">
+                    <th class="py-3 px-2">Tanggal</th><th class="py-3 px-2">Sumber Pakan</th><th class="py-3 px-2">Jumlah Zak</th><th class="py-3 px-2">Jumlah Kg</th>
+                </tr></thead><tbody class="divide-y divide-slate-100 dark:divide-slate-800 text-slate-600 dark:text-slate-300">`;
 
             let hasPakan = false;
 
             sorted.forEach(row => {
-                // FIX: pakai row.umur_hari (bukan row.usia), dan escape semua nilai dari sheet
-                html += `<tr>
-                    <td class="py-3 px-2 font-medium">${escapeHtml(formatDate(row.tanggal))}</td>
-                    <td class="py-3 px-2">${escapeHtml(row.umur_hari || '-')} Hari</td>
-                    <td class="py-3 px-2">${escapeHtml(row.abw_sekat1||0)}g | ${escapeHtml(row.abw_sekat2||0)}g | ${escapeHtml(row.abw_sekat3||0)}g | ${escapeHtml(row.abw_sekat4||0)}g</td>
-                    <td class="py-3 px-2">${escapeHtml(row.pakan_atas || 0)} / ${escapeHtml(row.pakan_bawah || 0)}</td>
-                    <td class="py-3 px-2 text-rose-600 font-semibold">${escapeHtml(row.jumlah_mati || 0)} Ekor</td>
-                </tr>`;
+                if(row.sheet === "Daily" || row.umur_hari !== undefined) {
+                    html += `<tr>
+                        <td class="py-3 px-2 font-medium">${escapeHtml(formatDate(row.tanggal))}</td>
+                        <td class="py-3 px-2 text-emerald-600 font-semibold">${escapeHtml(row.id_periode)}</td>
+                        <td class="py-3 px-2">${escapeHtml(row.umur_hari || '-')} Hari</td>
+                        <td class="py-3 px-2">${escapeHtml(row.abw_sekat1||0)}g | ${escapeHtml(row.abw_sekat2||0)}g | ${escapeHtml(row.abw_sekat3||0)}g | ${escapeHtml(row.abw_sekat4||0)}g</td>
+                        <td class="py-3 px-2">${escapeHtml(row.pakan_atas || 0)} / ${escapeHtml(row.pakan_bawah || 0)}</td>
+                        <td class="py-3 px-2 text-rose-600 font-semibold">${escapeHtml(row.jumlah_mati || 0)} Ekor</td>
+                    </tr>`;
+                }
 
-                if (row.jumlah_kg !== undefined && row.jumlah_kg !== null && row.jumlah_kg !== '') {
+                if (row.sheet === "Pakan" || (row.jumlah_kg !== undefined && row.jumlah_kg !== null && row.jumlah_kg !== '')) {
                     hasPakan = true;
                     pakanHtml += `<tr>
                         <td class="py-3 px-2 font-medium">${escapeHtml(formatDate(row.tanggal))}</td>
@@ -469,10 +354,7 @@
                     </tr>`;
                 }
             });
-
-            html += `</tbody></table>`;
-            pakanHtml += `</tbody></table>`;
-
+            html += `</tbody></table>`; pakanHtml += `</tbody></table>`;
             document.getElementById('tableContent').innerHTML = html;
             document.getElementById('tablePakanContent').innerHTML = hasPakan ? pakanHtml : '<div class="text-center py-6 text-slate-400 text-xs">Tidak ada data pakan masuk</div>';
         }
@@ -480,19 +362,15 @@
         function renderGallery(data) {
             let galleryHtml = '';
             data.forEach(row => {
-                const fotoFields = ['fotoList1', 'fotoList2', 'fotoList3', 'fotoList4', 'fotoList'];
-                fotoFields.forEach(field => {
+                ['fotoList1', 'fotoList2', 'fotoList3', 'fotoList4', 'fotoListKematian', 'fotoList'].forEach(field => {
                     const val = row[field];
                     if (Array.isArray(val) && val.length > 0) {
                         val.forEach(f => {
-                            // FIX: f.data adalah URL Google Drive, bukan base64.
-                            // Diubah ke endpoint thumbnail Drive supaya bisa dipasang langsung di <img>.
                             if (f && f.data) {
-                                const thumbSrc = driveThumbnail(f.data, 400);
-                                const fullSrc = driveThumbnail(f.data, 1200);
+                                const thumbSrc = driveThumbnail(f.data, 400); const fullSrc = driveThumbnail(f.data, 1200);
                                 if (!thumbSrc) return;
                                 galleryHtml += `<div class="bg-slate-50 dark:bg-slate-800/55 p-2 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm cursor-pointer hover:border-emerald-500 transition" onclick="openModal('${fullSrc}')">
-                                    <img src="${thumbSrc}" loading="lazy" class="w-full h-32 object-cover rounded-xl mb-2" alt="Dokumentasi ${escapeHtml(formatDate(row.tanggal))}" onerror="this.parentElement.style.display='none'">
+                                    <img src="${thumbSrc}" loading="lazy" class="w-full h-32 object-cover rounded-xl mb-2" alt="Foto">
                                     <div class="px-1 text-[11px] text-slate-400 font-medium">${escapeHtml(formatDate(row.tanggal))}</div>
                                 </div>`;
                             }
@@ -504,27 +382,20 @@
         }
 
         function updateCharts(data) {
-            const dateMap = new Map();
-            let sourceCounts = {};
+            const dateMap = new Map(); let sourceCounts = {};
 
             data.forEach(row => {
                 const tgl = row.tanggal ? row.tanggal.split('T')[0] : '1970-01-01';
                 if (!dateMap.has(tgl)) dateMap.set(tgl, { abw: [], pakan: 0, mati: 0 });
 
                 const entry = dateMap.get(tgl);
-                const abw1 = parseFloat(row.abw_sekat1) || 0;
-                const abw2 = parseFloat(row.abw_sekat2) || 0;
-                const abw3 = parseFloat(row.abw_sekat3) || 0;
-                const abw4 = parseFloat(row.abw_sekat4) || 0;
-                const vals = [abw1, abw2, abw3, abw4].filter(v => v > 0);
+                const vals = [parseFloat(row.abw_sekat1), parseFloat(row.abw_sekat2), parseFloat(row.abw_sekat3), parseFloat(row.abw_sekat4)].filter(v => v > 0);
                 if (vals.length > 0) entry.abw.push(vals.reduce((a,b) => a+b, 0) / vals.length);
 
-                entry.pakan += parseFloat(row.jumlah_kg) || 0;
-                entry.mati += parseInt(row.jumlah_mati) || 0;
+                if (row.sheet === "Pakan") entry.pakan += parseFloat(row.jumlah_kg) || 0;
+                if (row.sheet === "Daily" || row.sheet === "Kematian") entry.mati += parseInt(row.jumlah_mati) || 0;
 
-                if (row.sumber_pakan) {
-                    sourceCounts[row.sumber_pakan] = (sourceCounts[row.sumber_pakan] || 0) + (parseFloat(row.jumlah_kg) || 1);
-                }
+                if (row.sumber_pakan) sourceCounts[row.sumber_pakan] = (sourceCounts[row.sumber_pakan] || 0) + (parseFloat(row.jumlah_kg) || 0);
             });
 
             const sortedDates = Array.from(dateMap.keys()).sort();
@@ -533,71 +404,36 @@
             const pakanData = sortedDates.map(d => dateMap.get(d).pakan);
             const matiData = sortedDates.map(d => dateMap.get(d).mati);
 
-            const abwCtx = document.getElementById('abwChart').getContext('2d');
             if (abwChartInstance) abwChartInstance.destroy();
-            abwChartInstance = new Chart(abwCtx, {
-                type: 'line',
-                data: { labels: labels, datasets: [{ label: 'ABW (g)', data: abwData, borderColor: '#3b82f6', backgroundColor: 'rgba(59,130,246,0.1)', fill: true, tension: 0.3 }] },
-                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
-            });
+            abwChartInstance = new Chart(document.getElementById('abwChart').getContext('2d'), { type: 'line', data: { labels: labels, datasets: [{ label: 'ABW (g)', data: abwData, borderColor: '#3b82f6', backgroundColor: 'rgba(59,130,246,0.1)', fill: true, tension: 0.3 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } } });
 
-            const mortalitasCtx = document.getElementById('chartMortalitas').getContext('2d');
             if (chartMortalitasInstance) chartMortalitasInstance.destroy();
-            chartMortalitasInstance = new Chart(mortalitasCtx, {
-                type: 'bar',
-                data: { labels: labels, datasets: [{ label: 'Mortalitas (Ekor)', data: matiData, backgroundColor: '#f43f5e' }] },
-                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
-            });
+            chartMortalitasInstance = new Chart(document.getElementById('chartMortalitas').getContext('2d'), { type: 'bar', data: { labels: labels, datasets: [{ label: 'Mortalitas (Ekor)', data: matiData, backgroundColor: '#f43f5e' }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } } });
 
-            const pakanCtx = document.getElementById('pakanChart').getContext('2d');
             if (pakanChartInstance) pakanChartInstance.destroy();
-            pakanChartInstance = new Chart(pakanCtx, {
-                type: 'bar',
-                data: { labels: labels, datasets: [{ label: 'Pakan (Kg)', data: pakanData, backgroundColor: '#22c55e' }] },
-                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
-            });
+            pakanChartInstance = new Chart(document.getElementById('pakanChart').getContext('2d'), { type: 'bar', data: { labels: labels, datasets: [{ label: 'Pakan (Kg)', data: pakanData, backgroundColor: '#22c55e' }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } } });
 
-            const sumberCtx = document.getElementById('chartSumberPakan').getContext('2d');
             if (chartSumberPakanInstance) chartSumberPakanInstance.destroy();
-            chartSumberPakanInstance = new Chart(sumberCtx, {
-                type: 'pie',
-                data: {
-                    labels: Object.keys(sourceCounts).length > 0 ? Object.keys(sourceCounts) : ['Belum Ada Data'],
-                    datasets: [{ data: Object.values(sourceCounts).length > 0 ? Object.values(sourceCounts) : [1], backgroundColor: ['#22c55e', '#3b82f6', '#eab308', '#ec4899'] }]
-                },
-                options: { responsive: true, maintainAspectRatio: false }
-            });
+            chartSumberPakanInstance = new Chart(document.getElementById('chartSumberPakan').getContext('2d'), { type: 'pie', data: { labels: Object.keys(sourceCounts).length > 0 ? Object.keys(sourceCounts) : ['Belum Ada Data'], datasets: [{ data: Object.values(sourceCounts).length > 0 ? Object.values(sourceCounts) : [1], backgroundColor: ['#22c55e', '#3b82f6', '#eab308', '#ec4899'] }] }, options: { responsive: true, maintainAspectRatio: false } });
 
-            // FIX: sebelumnya chart ini diisi Math.random() (data palsu).
-            // Sekarang diisi data kematian per jam asli dari field `jam`
-            // yang dikirim backend, contoh: "Jam 5: 10; Jam 14: 3"
             let jamTotals = Array(24).fill(0);
             data.forEach(row => {
                 if (row.jam) {
                     row.jam.toString().split(';').forEach(part => {
                         const m = part.match(/Jam\s*(\d+)\s*:\s*(\d+)/);
-                        if (m) {
-                            const jamKe = parseInt(m[1], 10);
-                            const jumlah = parseInt(m[2], 10);
-                            if (jamKe >= 1 && jamKe <= 24 && !isNaN(jumlah)) {
-                                jamTotals[jamKe - 1] += jumlah;
-                            }
-                        }
+                        if (m) { const j = parseInt(m[1],10); const val = parseInt(m[2],10); if (j >= 1 && j <= 24 && !isNaN(val)) jamTotals[j-1] += val; }
                     });
                 }
             });
             const jamLabels = Array.from({length: 24}, (_, i) => 'Jam ' + (i + 1));
-            const jamCtx = document.getElementById('chartPerJam').getContext('2d');
             if (chartPerJamInstance) chartPerJamInstance.destroy();
-            chartPerJamInstance = new Chart(jamCtx, {
-                type: 'line',
-                data: { labels: jamLabels, datasets: [{ label: 'Kematian per Jam (Ekor)', data: jamTotals, borderColor: '#10b981', backgroundColor: 'rgba(16,185,129,0.1)', fill: true, tension: 0.3 }] },
-                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
-            });
+            chartPerJamInstance = new Chart(document.getElementById('chartPerJam').getContext('2d'), { type: 'line', data: { labels: jamLabels, datasets: [{ label: 'Kematian per Jam (Ekor)', data: jamTotals, borderColor: '#10b981', backgroundColor: 'rgba(16,185,129,0.1)', fill: true, tension: 0.3 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } } });
         }
 
+        // Jalankan untuk ambil data saat load
         loadAllData();
-        setInterval(loadAllData, 60000);
+        // Refresh tiap 5 menit untuk mencegah backend limit Apps Script
+        setInterval(loadAllData, 300000);
     </script>
 </body>
 </html>

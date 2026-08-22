@@ -11,6 +11,8 @@
         .header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: white; padding: 20px 28px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; }
         .header .brand h1 { font-size: 22px; font-weight: 700; }
         .header .brand .sub { font-size: 11px; opacity: 0.6; text-transform: uppercase; letter-spacing: 1px; }
+        .btn-refresh { background: #2ecc71; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: 600; }
+        .btn-refresh:hover { background: #27ae60; }
         .filter-box { background: white; padding: 20px; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
         .filter-box select, .filter-box input { padding: 10px; border: 2px solid #e8ecf1; border-radius: 8px; font-size: 14px; margin-right: 10px; }
         .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 20px; }
@@ -29,8 +31,6 @@
         .loading { text-align: center; padding: 40px; }
         .spinner { width: 40px; height: 40px; border: 4px solid #e8ecf1; border-top-color: #1a1a2e; border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 10px; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        .btn-refresh { background: #1a1a2e; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: 600; }
-        .btn-refresh:hover { opacity: 0.9; }
         @media (max-width: 768px) { .header { flex-direction: column; align-items: stretch; } }
     </style>
 </head>
@@ -49,8 +49,6 @@
         <label style="font-weight: 600; margin-right: 10px;">Filter Periode:</label>
         <select id="filterPeriode" onchange="loadDashboard()">
             <option value="">Semua Periode</option>
-            <option value="Siklus 1 - Agt 2026">Siklus 1 (Agustus 2026)</option>
-            <option value="Siklus 2 - Okt 2026">Siklus 2 (Oktober 2026)</option>
         </select>
     </div>
 
@@ -82,10 +80,30 @@
 </div>
 
 <script>
-    // ==========================================
     // KONFIGURASI - GANTI DENGAN URL APPS SCRIPT ANDA
-    // ==========================================
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzG3sAWAdXKq1u5s7sQYMcNnXyyC1BTS_F_OkTA1QGDI3AXPCD6G7A_fiWvSSa8VpFu/exec';
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxQDTBNX4lh7UH1ArW7Ys1nA9aNk3SQKu4yI80Al0apM0gn4JY4F9D86CuuyaSPJ6gV/exec';
+
+    // Load periode untuk filter
+    async function loadFilterPeriode() {
+        try {
+            const response = await fetch(SCRIPT_URL + '?action=getPeriode');
+            const result = await response.json();
+            
+            if (result.status === 'success' && result.data) {
+                const select = document.getElementById('filterPeriode');
+                select.innerHTML = '<option value="">Semua Periode</option>';
+                
+                result.data.forEach(periode => {
+                    const option = document.createElement('option');
+                    option.value = periode.id_periode;
+                    option.textContent = periode.display_name || periode.id_periode;
+                    select.appendChild(option);
+                });
+            }
+        } catch (error) {
+            console.error('Gagal load periode:', error);
+        }
+    }
 
     async function loadDashboard() {
         const content = document.getElementById('dashboardContent');
@@ -112,7 +130,6 @@
     function displayDashboard(data) {
         const content = document.getElementById('dashboardContent');
         
-        // Hitung statistik
         let totalDaily = 0;
         let totalPakan = 0;
         let totalMati = 0;
@@ -138,7 +155,6 @@
         document.getElementById('totalMati').textContent = totalMati;
         document.getElementById('avgAbw').textContent = abwCount > 0 ? Math.round(totalAbw / abwCount) + 'g' : '0g';
         
-        // Buat tabel
         let html = '';
         
         // Tabel Daily
@@ -168,7 +184,7 @@
         const pakanData = data.filter(item => item.sheet === 'Pakan');
         if (pakanData.length > 0) {
             html += '<div class="card"><h2>📦 Riwayat Pakan Masuk</h2><div style="overflow-x: auto;"><table>';
-            html += '<thead><tr><th>Tanggal</th><th>Periode</th><th>Sumber</th><th>No. PO</th><th>Zak</th><th>Kg</th><th>Kendaraan</th><th>Deskripsi</th></tr></thead>';
+            html += '<thead><tr><th>Tanggal</th><th>Periode</th><th>Sumber</th><th>No. PO</th><th>Zak</th><th>Kg</th><th>Kendaraan</th></tr></thead>';
             html += '<tbody>';
             pakanData.forEach(item => {
                 html += '<tr>';
@@ -179,7 +195,6 @@
                 html += '<td>' + item.jumlah_zak + '</td>';
                 html += '<td>' + item.jumlah_kg + '</td>';
                 html += '<td>' + item.kendaraan + '</td>';
-                html += '<td>' + (item.deskripsi || '-') + '</td>';
                 html += '</tr>';
             });
             html += '</tbody></table></div></div>';
@@ -193,6 +208,7 @@
     }
 
     // Load dashboard saat halaman dimuat
+    loadFilterPeriode();
     loadDashboard();
     
     // Auto refresh setiap 5 menit

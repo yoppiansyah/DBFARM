@@ -19,65 +19,47 @@
         .form-group label { display: block; margin-bottom: 8px; font-weight: 600; font-size: 13px; color: #2c3e50; }
         .input-group { position: relative; }
         .input-group .icon { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); font-size: 16px; color: #9aa5b1; }
-        .input-group input { width: 100%; padding: 12px 15px 12px 45px; border: 2px solid #e8ecf1; border-radius: 10px; font-size: 15px; transition: all 0.3s; background: #fafbfc; }
-        .input-group input:focus { outline: none; border-color: #1a1a2e; background: white; box-shadow: 0 0 0 3px rgba(26, 26, 46, 0.05); }
-        .password-toggle { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 13px; color: #9aa5b1; user-select: none; }
+        .input-group input { width: 100%; padding: 12px 15px 12px 45px; border: 2px solid #e8ecf1; border-radius: 10px; font-size: 15px; background: #fafbfc; }
+        .input-group input:focus { outline: none; border-color: #1a1a2e; background: white; }
+        .password-toggle { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 13px; color: #9aa5b1; }
         .btn-login { width: 100%; padding: 14px; background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%); color: white; border: none; border-radius: 10px; font-size: 15px; font-weight: 700; cursor: pointer; }
-        .btn-login:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(26, 26, 46, 0.2); }
-        .alert { padding: 12px 15px; border-radius: 8px; margin-bottom: 20px; display: none; font-size: 13px; font-weight: 500; }
-        .alert.show { display: flex; align-items: center; gap: 10px; }
+        .alert { padding: 12px 15px; border-radius: 8px; margin-bottom: 20px; display: none; font-size: 13px; }
+        .alert.show { display: block; }
         .alert.error { background: #fdf2f2; color: #a93226; border-left: 4px solid #e74c3c; }
         
         /* DASHBOARD */
         .dashboard-container { display: none; max-width: 1400px; margin: 0 auto; }
         .header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: white; padding: 20px 28px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; }
         .header .brand h1 { font-size: 22px; font-weight: 700; }
-        .header .brand .sub { font-size: 11px; opacity: 0.6; text-transform: uppercase; letter-spacing: 1px; }
-        .header .user-info { display: flex; align-items: center; gap: 15px; }
-        .btn-logout { background: #e74c3c; color: white; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 13px; }
+        .header .brand .sub { font-size: 11px; opacity: 0.6; text-transform: uppercase; }
+        .btn-logout { background: #e74c3c; color: white; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-weight: 600; }
         .btn-refresh { background: #2ecc71; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: 600; margin-bottom: 20px; }
         
         /* TABS */
-        .tabs { display: flex; gap: 4px; margin-bottom: 20px; border-bottom: 2px solid #e8ecf1; flex-wrap: wrap; }
+        .tabs { display: flex; gap: 4px; margin-bottom: 20px; border-bottom: 2px solid #e8ecf1; }
         .tab-btn { padding: 10px 22px; border: none; background: transparent; color: #7f8c8d; font-weight: 600; font-size: 14px; cursor: pointer; border-bottom: 3px solid transparent; margin-bottom: -2px; }
         .tab-btn.active { color: #1a1a2e; border-bottom-color: #1a1a2e; }
         .tab-content { display: none; }
-        .tab-content.active { display: block; animation: fade 0.3s ease; }
-        @keyframes fade { 0% { opacity: 0; } 100% { opacity: 1; } }
+        .tab-content.active { display: block; }
         
         .filter-box { background: white; padding: 20px; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
-        .filter-box select { padding: 10px; border: 2px solid #e8ecf1; border-radius: 8px; font-size: 14px; margin-right: 10px; }
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 20px; }
-        .stat-card { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
-        .stat-card .label { font-size: 12px; color: #7f8c8d; text-transform: uppercase; }
-        .stat-card .value { font-size: 28px; font-weight: 700; margin-top: 8px; }
-        .stat-card .value.green { color: #2ecc71; }
-        .stat-card .value.red { color: #e74c3c; }
-        .stat-card .value.blue { color: #3498db; }
+        .filter-box select, .filter-box input { padding: 10px; border: 2px solid #e8ecf1; border-radius: 8px; font-size: 14px; margin-right: 10px; }
         
         .card { background: white; padding: 20px; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
         .card h2 { font-size: 18px; margin-bottom: 16px; }
         
-        /* MASTER REPORT */
-        .master-report { background: white; padding: 30px; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
-        .master-report .title { text-align: center; font-size: 20px; font-weight: 700; margin-bottom: 5px; }
-        .master-report .farm-name { text-align: center; font-size: 16px; font-weight: 600; color: #1a1a2e; margin-bottom: 5px; }
-        .master-report .date { text-align: center; font-size: 14px; color: #5d6d7e; margin-bottom: 20px; }
-        .master-report .divider { border-top: 2px solid #e8ecf1; margin: 20px 0; }
-        .master-report .section-title { font-weight: 700; font-size: 15px; margin-bottom: 10px; color: #1a1a2e; }
-        .master-report .item { padding: 8px 0; font-size: 14px; }
-        .master-report .item a { color: #3498db; text-decoration: none; }
-        .master-report .item a:hover { text-decoration: underline; }
-        .master-report .total { font-weight: 700; font-size: 16px; margin-top: 10px; }
-        
         table { width: 100%; border-collapse: collapse; }
-        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #e8ecf1; font-size: 14px; }
+        th, td { padding: 10px; text-align: left; border-bottom: 1px solid #e8ecf1; font-size: 13px; }
         th { background: #f8f9fc; font-weight: 700; color: #2c3e50; }
         tr:hover { background: #f8f9fc; }
         
+        /* FOTO */
         .foto-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(60px, 1fr)); gap: 6px; }
-        .foto-item { width: 60px; height: 60px; border-radius: 6px; overflow: hidden; cursor: pointer; }
+        .foto-item { width: 60px; height: 60px; border-radius: 6px; overflow: hidden; cursor: pointer; border: 2px solid #e8ecf1; }
+        .foto-item:hover { border-color: #3498db; }
         .foto-item img { width: 100%; height: 100%; object-fit: cover; }
+        .foto-link { color: #3498db; text-decoration: none; cursor: pointer; }
+        .foto-link:hover { text-decoration: underline; }
         
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 1000; justify-content: center; align-items: center; cursor: pointer; }
         .modal.active { display: flex; }
@@ -87,6 +69,8 @@
         .loading { text-align: center; padding: 40px; }
         .spinner { width: 40px; height: 40px; border: 4px solid #e8ecf1; border-top-color: #1a1a2e; border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 10px; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        
+        @media (max-width: 768px) { .header { flex-direction: column; } }
     </style>
 </head>
 <body>
@@ -128,747 +112,74 @@
             <h1>Nadz Farm's</h1>
             <div class="sub">Dashboard Monitoring</div>
         </div>
-        <div class="user-info">
-            <span id="displayUsername"></span>
+        <div style="display:flex;align-items:center;gap:15px;">
+            <span id="displayUsername" style="font-size:14px;"></span>
             <button class="btn-logout" onclick="logout()">Keluar</button>
         </div>
     </div>
 
     <button class="btn-refresh" onclick="loadDashboard()">Refresh Data</button>
 
-    <!-- TABS -->
     <div class="tabs">
-        <button class="tab-btn active" data-tab="master">Master Laporan Harian</button>
-        <button class="tab-btn" data-tab="tabel">Tabel Data</button>
+        <button class="tab-btn active" data-tab="pakan">Riwayat Pakan</button>
+        <button class="tab-btn" data-tab="daily">Laporan Harian</button>
     </div>
 
-    <!-- FILTER -->
     <div class="filter-box">
-        <label style="font-weight: 600; margin-right: 10px;">Filter Periode:</label>
+        <label style="font-weight:600;margin-right:10px;">Filter Periode:</label>
         <select id="filterPeriode" onchange="loadDashboard()">
             <option value="">Semua Periode</option>
         </select>
-        <label style="font-weight: 600; margin: 0 10px;">Tanggal:</label>
-        <input type="date" id="filterTanggal" onchange="loadDashboard()">
     </div>
 
-    <!-- STATS -->
-    <div class="stats-grid">
-        <div class="stat-card">
-            <div class="label">Total Data Harian</div>
-            <div class="value blue" id="totalDaily">0</div>
-        </div>
-        <div class="stat-card">
-            <div class="label">Total Pakan Masuk</div>
-            <div class="value green" id="totalPakan">0</div>
-        </div>
-        <div class="stat-card">
-            <div class="label">Total Kematian</div>
-            <div class="value red" id="totalMati">0</div>
-        </div>
-        <div class="stat-card">
-            <div class="label">Rata-rata ABW</div>
-            <div class="value blue" id="avgAbw">0g</div>
-        </div>
-    </div>
-
-    <!-- TAB CONTENT -->
-    <div id="tab-master" class="tab-content active">
-        <div id="masterReportContent">
+    <div id="tab-pakan" class="tab-content active">
+        <div id="pakanContent">
             <div class="loading"><div class="spinner"></div><div>Memuat data...</div></div>
         </div>
     </div>
 
-    <div id="tab-tabel" class="tab-content">
-        <div id="dashboardContent">
+    <div id="tab-daily" class="tab-content">
+        <div id="dailyContent">
             <div class="loading"><div class="spinner"></div><div>Memuat data...</div></div>
         </div>
     </div>
 </div>
 
-<!-- MODAL -->
+<!-- MODAL FOTO -->
 <div class="modal" id="fotoModal" onclick="closeModal()">
     <span class="close">&times;</span>
     <img id="modalImage" src="" alt="Foto">
 </div>
 
 <script>
-    const SCRIPT_URL = '/** 
- * NADZ FARM'S MASTER BACKEND - PERIODE DINAMIS (FULL FIXED + FOTO)
- * Mendukung tanggal masuk bibit yang fleksibel
- * Terintegrasi dengan Web Form, Telegram Bot, dan Dashboard
- */
-
-// Konfigurasi Telegram
-const TELEGRAM_BOT_TOKEN = "8999017219:AAEAukjRFluGhMQHQTcbES5v0mlShHeA4HU"; 
-const TELEGRAM_CHAT_ID = "-1003881184133";
-const VALID_SHEETS = ["Report Pakan", "Report Kematian", "Report Daily"];
-
-// =================================================================
-// 0. SETUP DATABASE
-// =================================================================
-function setupDatabase() {
-  var doc = SpreadsheetApp.getActiveSpreadsheet();
-  
-  // 1. Master Periode
-  var sheetPeriode = doc.getSheetByName("Master Periode");
-  if (!sheetPeriode) {
-    sheetPeriode = doc.insertSheet("Master Periode");
-    sheetPeriode.appendRow(["ID Periode", "Nama Periode", "Tanggal Bibit Masuk", "Estimasi Panen", 
-                            "Status", "Jumlah Bibit", "Jenis Bibit", "Catatan"]);
-  }
-  sheetPeriode.getRange("C2:D1000").setNumberFormat("yyyy-mm-dd");
-  sheetPeriode.setColumnWidth(1, 120);
-  sheetPeriode.setColumnWidth(2, 120);
-  sheetPeriode.setColumnWidth(3, 130);
-  sheetPeriode.setColumnWidth(4, 130);
-  sheetPeriode.setColumnWidth(5, 100);
-  sheetPeriode.setColumnWidth(6, 100);
-  sheetPeriode.setColumnWidth(7, 120);
-  sheetPeriode.setColumnWidth(8, 200);
-  
-  // 2. Report Daily
-  var sheetDaily = doc.getSheetByName("Report Daily");
-  if (!sheetDaily) {
-    sheetDaily = doc.insertSheet("Report Daily");
-    sheetDaily.appendRow(["Timestamp", "ID Periode", "Tanggal", "Umur Hari", "Pakan Atas", "Pakan Bawah", 
-                          "ABW 1", "Foto 1", "ABW 2", "Foto 2", "ABW 3", "Foto 3", "ABW 4", "Foto 4"]);
-  }
-  
-  // 3. Report Pakan
-  var sheetPakan = doc.getSheetByName("Report Pakan");
-  if (!sheetPakan) {
-    sheetPakan = doc.insertSheet("Report Pakan");
-    sheetPakan.appendRow(["Timestamp", "ID Periode", "Tanggal", "Sumber", "PO", "Zak", "Kg", 
-                          "Kendaraan", "Deskripsi", "Dokumentasi"]);
-  }
-  
-  // 4. Report Kematian
-  var sheetMati = doc.getSheetByName("Report Kematian");
-  if (!sheetMati) {
-    sheetMati = doc.insertSheet("Report Kematian");
-    var headerMati = ["Timestamp", "ID Periode", "Tanggal"];
-    for (var i = 1; i <= 24; i++) headerMati.push("Jam " + i);
-    sheetMati.appendRow(headerMati);
-  }
-  
-  // 5. Rekap Laporan Full
-  var sheetRekap = doc.getSheetByName("Rekap Laporan Full");
-  if (!sheetRekap) {
-    sheetRekap = doc.insertSheet("Rekap Laporan Full");
-    var headerRekap = ["ID Periode", "Tanggal", "Umur Hari", "Pakan Atas", "Pakan Bawah", 
-                       "ABW 1", "Foto 1", "ABW 2", "Foto 2", "ABW 3", "Foto 3", "ABW 4", "Foto 4"];
-    for (var j = 1; j <= 24; j++) headerRekap.push("Jam " + j);
-    headerRekap.push("Total Mati");
-    sheetRekap.appendRow(headerRekap);
-  }
-  
-  formatAllHeaders();
-  Logger.log("Database berhasil diinisialisasi!");
-  return "Database berhasil dibuat!";
-}
-
-// =================================================================
-// FUNGSI: Konversi URL Google Drive ke Thumbnail
-// =================================================================
-function convertDriveUrlToThumbnail(url) {
-  if (!url || url === "Tidak ada dokumentasi") return "";
-  
-  var urls = url.split(',').map(function(u) { return u.trim(); });
-  var thumbnails = [];
-  
-  urls.forEach(function(u) {
-    if (u.indexOf('drive.google.com') > -1) {
-      var fileId = '';
-      var match = u.match(/\/d\/([^\/]+)/);
-      if (match) {
-        fileId = match[1];
-      } else {
-        match = u.match(/id=([^&]+)/);
-        if (match) fileId = match[1];
-      }
-      
-      if (fileId) {
-        thumbnails.push('https://drive.google.com/thumbnail?id=' + fileId + '&sz=w500');
-      } else {
-        thumbnails.push(u);
-      }
-    } else {
-      thumbnails.push(u);
-    }
-  });
-  
-  return thumbnails.join(',');
-}
-
-// =================================================================
-// FUNGSI: Mendapatkan Info Periode
-// =================================================================
-function getPeriodeInfo(idPeriode) {
-  var doc = SpreadsheetApp.getActiveSpreadsheet();
-  var sheetPeriode = doc.getSheetByName("Master Periode");
-  if (!sheetPeriode) { setupDatabase(); sheetPeriode = doc.getSheetByName("Master Periode"); }
-  
-  var data = sheetPeriode.getDataRange().getValues();
-  for (var i = 1; i < data.length; i++) {
-    if (data[i][0] === idPeriode) {
-      return {
-        id_periode: data[i][0],
-        nama_periode: data[i][1] || data[i][0],
-        tanggal_masuk: data[i][2],
-        estimasi_panen: data[i][3],
-        status: data[i][4] || "Aktif",
-        jumlah_bibit: data[i][5] || "",
-        jenis_bibit: data[i][6] || "DOC Broiler",
-        catatan: data[i][7] || ""
-      };
-    }
-  }
-  return null;
-}
-
-// =================================================================
-// FUNGSI: Menghitung Umur Ayam
-// =================================================================
-function hitungUmurAyam(idPeriode, tanggalLaporan) {
-  var infoPeriode = getPeriodeInfo(idPeriode);
-  if (!infoPeriode || !infoPeriode.tanggal_masuk) return null;
-  
-  var tglMasuk = new Date(infoPeriode.tanggal_masuk);
-  var tglLaporan = new Date(tanggalLaporan);
-  var selisihHari = Math.floor((tglLaporan - tglMasuk) / (1000 * 60 * 60 * 24));
-  var umur = selisihHari + 1;
-  return umur > 0 ? umur : 0;
-}
-
-// =================================================================
-// FUNGSI: Mendapatkan Semua Periode
-// =================================================================
-function getAllPeriode() {
-  var doc = SpreadsheetApp.getActiveSpreadsheet();
-  var sheetPeriode = doc.getSheetByName("Master Periode");
-  if (!sheetPeriode) { setupDatabase(); sheetPeriode = doc.getSheetByName("Master Periode"); }
-  
-  var lastRow = sheetPeriode.getLastRow();
-  if (lastRow <= 1) {
-    return [{ id_periode: "Belum Ada", nama_periode: "Belum Ada Periode", tanggal_masuk: "", estimasi_panen: "", status: "Kosong", display_name: "Belum Ada Periode" }];
-  }
-  
-  var data = sheetPeriode.getRange(2, 1, lastRow - 1, 8).getValues();
-  var periodeList = [];
-  
-  for (var i = 0; i < data.length; i++) {
-    if (data[i][0]) {
-      var tanggalMasuk = data[i][2] ? formatDate(data[i][2]) : "";
-      var estimasiPanen = data[i][3] ? formatDate(data[i][3]) : "";
-      periodeList.push({
-        id_periode: data[i][0],
-        nama_periode: data[i][1] || data[i][0],
-        tanggal_masuk: tanggalMasuk,
-        estimasi_panen: estimasiPanen,
-        status: data[i][4] || "Aktif",
-        jumlah_bibit: data[i][5] || "",
-        jenis_bibit: data[i][6] || "DOC Broiler",
-        catatan: data[i][7] || "",
-        display_name: data[i][0] + " (Masuk: " + tanggalMasuk + ")"
-      });
-    }
-  }
-  
-  periodeList.sort(function(a, b) { return new Date(b.tanggal_masuk) - new Date(a.tanggal_masuk); });
-  return periodeList;
-}
-
-// =================================================================
-// FUNGSI: Menambah Periode Baru
-// =================================================================
-function addNewPeriode(data) {
-  var doc = SpreadsheetApp.getActiveSpreadsheet();
-  var sheetPeriode = doc.getSheetByName("Master Periode");
-  if (!sheetPeriode) { setupDatabase(); sheetPeriode = doc.getSheetByName("Master Periode"); }
-  
-  if (!data.id_periode || !data.tanggal_masuk) throw new Error("ID Periode dan Tanggal Bibit Masuk wajib diisi!");
-  
-  var existingData = sheetPeriode.getDataRange().getValues();
-  for (var i = 1; i < existingData.length; i++) {
-    if (existingData[i][0] === data.id_periode) throw new Error("ID Periode sudah ada!");
-  }
-  
-  var tglMasuk = new Date(data.tanggal_masuk);
-  var tglPanen = new Date(tglMasuk);
-  tglPanen.setDate(tglPanen.getDate() + (data.estimasi_hari || 60));
-  
-  sheetPeriode.appendRow([data.id_periode, data.nama_periode || data.id_periode, data.tanggal_masuk, 
-                          formatDate(tglPanen), "Aktif", data.jumlah_bibit || "", data.jenis_bibit || "DOC Broiler", data.catatan || "Periode baru"]);
-  
-  return { status: "success", message: "Periode baru berhasil ditambahkan!" };
-}
-
-// =================================================================
-// 1. ENTRY POINT (POST)
-// =================================================================
-function doPost(e) {
-  var lock = LockService.getScriptLock();
-  var hasLock = lock.tryLock(15000);
-  if (!hasLock) return ContentService.createTextOutput(JSON.stringify({status: "error", error: "Server sibuk"})).setMimeType(ContentService.MimeType.JSON);
-
-  try {
-    ensureDatabaseExists();
-    var contents = JSON.parse(e.postData.contents);
-
-    if (contents.update_id !== undefined) {
-      if (contents.message && contents.message.text) handleTelegramCommand(contents.message);
-      return ContentService.createTextOutput(JSON.stringify({status: "success"})).setMimeType(ContentService.MimeType.JSON);
-    }
-
-    if (contents.action === "addPeriode") {
-      var result = addNewPeriode(contents.data);
-      return ContentService.createTextOutput(JSON.stringify(result)).setMimeType(ContentService.MimeType.JSON);
-    }
-
-    if (VALID_SHEETS.indexOf(contents.sheetName) === -1) throw new Error("Sheet tidak dikenali");
-    
-    processWebForm(contents);
-    return ContentService.createTextOutput(JSON.stringify({status: "success"})).setMimeType(ContentService.MimeType.JSON);
-
-  } catch (err) {
-    return ContentService.createTextOutput(JSON.stringify({status: "error", error: err.toString()})).setMimeType(ContentService.MimeType.JSON);
-  } finally {
-    lock.releaseLock();
-  }
-}
-
-// =================================================================
-// 2. API DASHBOARD (GET)
-// =================================================================
-function doGet(e) {
-  var action = (e && e.parameter) ? e.parameter.action : "";
-  ensureDatabaseExists();
-  
-  if (action === "getAll") return handleGetAllData(e);
-  if (action === "getPeriode") return handleGetPeriode();
-  if (action === "setup") return handleSetup();
-  
-  return ContentService.createTextOutput(JSON.stringify({ status: "success", message: "API Backend Aktif" })).setMimeType(ContentService.MimeType.JSON);
-}
-
-function handleSetup() {
-  try { setupDatabase(); return ContentService.createTextOutput(JSON.stringify({ status: "success" })).setMimeType(ContentService.MimeType.JSON); }
-  catch (err) { return ContentService.createTextOutput(JSON.stringify({ status: "error", message: err.toString() })).setMimeType(ContentService.MimeType.JSON); }
-}
-
-function handleGetPeriode() {
-  try { return ContentService.createTextOutput(JSON.stringify({ status: "success", data: getAllPeriode() })).setMimeType(ContentService.MimeType.JSON); }
-  catch (err) { return ContentService.createTextOutput(JSON.stringify({ status: "error", message: err.toString() })).setMimeType(ContentService.MimeType.JSON); }
-}
-
-// =================================================================
-// 5. HANDLER GET ALL DATA (DENGAN FOTO)
-// =================================================================
-function handleGetAllData(e) {
-  try {
-    var doc = SpreadsheetApp.getActiveSpreadsheet();
-    var allData = [];
-    var filterPeriode = (e && e.parameter.periode) ? e.parameter.periode : "";
-    
-    // Proses data kematian
-    var matiMap = {};
-    var sheetMati = doc.getSheetByName("Report Kematian");
-    if (sheetMati) {
-      var lastRowMati = sheetMati.getLastRow();
-      if (lastRowMati > 1) {
-        var matiData = sheetMati.getRange(2, 1, lastRowMati - 1, sheetMati.getLastColumn()).getValues();
-        for (var i = 0; i < matiData.length; i++) {
-          var row = matiData[i];
-          if (!row[2]) continue;
-          
-          var id_periode = row[1] || "";
-          if (filterPeriode && id_periode !== filterPeriode) continue;
-          
-          var tgl = formatDate(row[2]);
-          var key = id_periode + "_" + tgl;
-          var totalMati = 0;
-          var jamInfo = [];
-          var fotoMati = [];
-          
-          for (var j = 3; j < row.length; j++) {
-            if (row[j] && row[j].toString().trim() !== "") {
-              var matchMati = row[j].toString().match(/Mati:\s*(\d+)/);
-              if (matchMati) {
-                var jml = parseInt(matchMati[1]);
-                totalMati += jml;
-                var pelapor = (row[j].toString().match(/Pelapor:\s*([^\n]+)/) || [])[1] || "Staff";
-                jamInfo.push("Jam " + (j - 2) + " (" + pelapor + ") : " + jml + " ekor");
-              }
-              var matchFoto = row[j].toString().match(/Foto:\s*(.+)$/);
-              if (matchFoto) fotoMati.push(matchFoto[1]);
-            }
-          }
-          matiMap[key] = { id_periode: id_periode, jumlah_mati: totalMati, jam: jamInfo.join("; "), foto: fotoMati.join(',') };
-        }
-      }
-    }
-
-    // Proses data daily
-    var sheetDaily = doc.getSheetByName("Report Daily");
-    if (sheetDaily) {
-      var lastRowDaily = sheetDaily.getLastRow();
-      if (lastRowDaily > 1) {
-        var dailyData = sheetDaily.getRange(2, 1, lastRowDaily - 1, 14).getValues();
-        for (var i = 0; i < dailyData.length; i++) {
-          var row = dailyData[i];
-          if (!row[2]) continue;
-          
-          var id_periode = row[1] || "";
-          if (filterPeriode && id_periode !== filterPeriode) continue;
-          
-          var tgl = formatDate(row[2]);
-          var key = id_periode + "_" + tgl;
-          var m = matiMap[key] || { jumlah_mati: 0, jam: "", foto: "" };
-          
-          allData.push({
-            sheet: "Daily",
-            id_periode: id_periode,
-            tanggal: tgl,
-            umur_hari: row[3] || "",
-            pakan_atas: row[4] || "",
-            pakan_bawah: row[5] || "",
-            abw_sekat1: row[6] || "",
-            foto_sekat1: convertDriveUrlToThumbnail(row[7]),
-            abw_sekat2: row[8] || "",
-            foto_sekat2: convertDriveUrlToThumbnail(row[9]),
-            abw_sekat3: row[10] || "",
-            foto_sekat3: convertDriveUrlToThumbnail(row[11]),
-            abw_sekat4: row[12] || "",
-            foto_sekat4: convertDriveUrlToThumbnail(row[13]),
-            jumlah_mati: m.jumlah_mati,
-            jam: m.jam,
-            foto_kematian: convertDriveUrlToThumbnail(m.foto)
-          });
-        }
-      }
-    }
-    
-    // Proses data pakan
-    var sheetPakan = doc.getSheetByName("Report Pakan");
-    if (sheetPakan) {
-      var lastRowPakan = sheetPakan.getLastRow();
-      if (lastRowPakan > 1) {
-        var pakanData = sheetPakan.getRange(2, 1, lastRowPakan - 1, 10).getValues();
-        for (var i = 0; i < pakanData.length; i++) {
-          var row = pakanData[i];
-          if (!row[2]) continue;
-          
-          var id_periode = row[1] || "";
-          if (filterPeriode && id_periode !== filterPeriode) continue;
-          
-          allData.push({
-            sheet: "Pakan",
-            id_periode: id_periode,
-            tanggal: formatDate(row[2]),
-            sumber_pakan: row[3] || "",
-            no_po: row[4] || "",
-            jumlah_zak: row[5] || "",
-            jumlah_kg: row[6] || "",
-            kendaraan: row[7] || "",
-            deskripsi: row[8] || "",
-            dokumentasi: convertDriveUrlToThumbnail(row[9])
-          });
-        }
-      }
-    }
-    
-    return ContentService.createTextOutput(JSON.stringify({ status: "success", data: allData })).setMimeType(ContentService.MimeType.JSON);
-  } catch (err) {
-    return ContentService.createTextOutput(JSON.stringify({ status: "error", message: err.toString() })).setMimeType(ContentService.MimeType.JSON);
-  }
-}
-
-// =================================================================
-// 6. PROSES WEB FORM
-// =================================================================
-function processWebForm(data) {
-  var doc = SpreadsheetApp.getActiveSpreadsheet();
-  var sheet = doc.getSheetByName(data.sheetName);
-  if (!sheet) { sheet = doc.insertSheet(data.sheetName); buatHeaderOtomatis(sheet, data.sheetName); }
-  else { ensureHeaderExists(sheet, data.sheetName); }
-
-  var ts = new Date();
-  var periode = data.id_periode || "Tidak Ada Periode";
-
-  if (data.sheetName === "Report Pakan") {
-    var urls = processPhotos(data.fotoList, "Eviden_Pakan");
-    sheet.appendRow([ts, periode, data.tanggal, data.sumber_pakan, data.no_po_atau_asal, 
-                     data.jumlah_zak, data.jumlah_kg, data.kendaraan, data.deskripsi, urls]);
-    
-    var msgPakan = `📦 *NOTIFIKASI PAKAN MASUK*\nNadz Farm | ${periode}\n\n` +
-                   `📅 Tanggal: ${data.tanggal}\n🏭 Sumber: ${data.sumber_pakan}\n` +
-                   `⚖️ Jumlah: ${data.jumlah_zak} Zak (${data.jumlah_kg} Kg)\n` +
-                   `📸 *Dokumentasi:* ${urls}`;
-    sendTelegramMessageMarkdown(msgPakan);
-  }
-  else if (data.sheetName === "Report Kematian") {
-    var urls = processPhotos(data.fotoList, "Eviden_Kematian");
-    var range = sheet.getDataRange().getValues();
-    var idx = -1;
-    
-    for (var i = 1; i < range.length; i++) { 
-      if (formatDate(range[i][2]) === formatDate(data.tanggal) && range[i][1] === periode) { idx = i + 1; break; } 
-    }
-    
-    if (idx === -1) { sheet.appendRow([ts, periode, data.tanggal]); idx = sheet.getLastRow(); }
-    
-    var colJam = 3 + Number(data.jam);
-    sheet.getRange(idx, colJam).setValue(`Jam: ${data.jam} (Pelapor: ${data.pelapor})\nMati: ${data.jumlah_mati} ekor\nFoto: ${urls}`);
-    
-    var msgMati = `⚠️ *LAPORAN KEMATIAN*\nNadz Farm | ${periode}\n\n` +
-                  `📅 Tanggal: ${data.tanggal}\n⏰ Jam ke-: ${data.jam}\n` +
-                  `👤 Pelapor: ${data.pelapor}\n💀 Jumlah: *${data.jumlah_mati} Ekor*\n📸 *Foto:* ${urls}`;
-    sendTelegramMessageMarkdown(msgMati);
-  }
-  else if (data.sheetName === "Report Daily") {
-    var umurOtomatis = hitungUmurAyam(periode, data.tanggal);
-    var umurFinal = data.umur_hari || umurOtomatis || 0;
-    
-    var u1 = processPhotos(data.fotoList1, "Sekat1");
-    var u2 = processPhotos(data.fotoList2, "Sekat2");
-    var u3 = processPhotos(data.fotoList3, "Sekat3");
-    var u4 = processPhotos(data.fotoList4, "Sekat4");
-    
-    sheet.appendRow([ts, periode, data.tanggal, umurFinal, data.pakan_atas, data.pakan_bawah, 
-                     data.abw_sekat1, u1, data.abw_sekat2, u2, data.abw_sekat3, u3, data.abw_sekat4, u4]);
-    
-    updateRekapLaporanFull();
-    sendMasterDailyReportToTelegram(data.tanggal, periode, umurFinal);
-  }
-}
-
-// =================================================================
-// 7. UTILITAS
-// =================================================================
-function ensureDatabaseExists() {
-  var doc = SpreadsheetApp.getActiveSpreadsheet();
-  var sheets = doc.getSheets();
-  var sheetNames = sheets.map(function(s) { return s.getName(); });
-  var requiredSheets = ["Report Pakan", "Report Kematian", "Report Daily", "Master Periode"];
-  var missing = requiredSheets.filter(function(n) { return sheetNames.indexOf(n) === -1; });
-  if (missing.length > 0) setupDatabase();
-}
-
-function formatAllHeaders() {
-  var doc = SpreadsheetApp.getActiveSpreadsheet();
-  doc.getSheets().forEach(function(sheet) {
-    var lastCol = sheet.getLastColumn();
-    if (lastCol > 0) {
-      sheet.getRange(1, 1, 1, lastCol).setBackground("#4CAF50").setFontColor("#FFFFFF").setFontWeight("bold").setHorizontalAlignment("center");
-      sheet.setFrozenRows(1);
-    }
-  });
-}
-
-function ensureHeaderExists(sheet, sheetName) {
-  var lastRow = sheet.getLastRow();
-  if (lastRow === 0) { buatHeaderOtomatis(sheet, sheetName); return; }
-}
-
-function getExpectedHeader(sheetName) {
-  if (sheetName === "Report Daily") return ["Timestamp", "ID Periode", "Tanggal", "Umur Hari", "Pakan Atas", "Pakan Bawah", "ABW 1", "Foto 1", "ABW 2", "Foto 2", "ABW 3", "Foto 3", "ABW 4", "Foto 4"];
-  if (sheetName === "Report Pakan") return ["Timestamp", "ID Periode", "Tanggal", "Sumber", "PO", "Zak", "Kg", "Kendaraan", "Deskripsi", "Dokumentasi"];
-  if (sheetName === "Report Kematian") {
-    var h = ["Timestamp", "ID Periode", "Tanggal"];
-    for (var i = 1; i <= 24; i++) h.push("Jam " + i);
-    return h;
-  }
-  return [];
-}
-
-function buatHeaderOtomatis(s, n) {
-  var header = getExpectedHeader(n);
-  if (header.length > 0) s.appendRow(header);
-}
-
-function processPhotos(list, folderName) {
-  if (!list || list.length === 0) return "Tidak ada dokumentasi";
-  var urls = [];
-  var folder = getOrCreateFolder(folderName);
-  for (var i = 0; i < list.length; i++) {
-    var blob = Utilities.newBlob(Utilities.base64Decode(list[i].data), list[i].mime, list[i].name);
-    var file = folder.createFile(blob);
-    file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
-    urls.push(file.getUrl());
-  }
-  return urls.join(", ");
-}
-
-function getOrCreateFolder(n) { 
-  var f = DriveApp.getFoldersByName(n); 
-  return f.hasNext() ? f.next() : DriveApp.createFolder(n); 
-}
-
-function formatDate(d) {
-  if (!d) return "";
-  if (typeof d === 'string' && /^\d{4}-\d{2}-\d{2}/.test(d)) return d.substring(0, 10);
-  return Utilities.formatDate(new Date(d), Session.getScriptTimeZone(), "yyyy-MM-dd");
-}
-
-function sendTelegramMessageMarkdown(msg) {
-  UrlFetchApp.fetch("https://api.telegram.org/bot" + TELEGRAM_BOT_TOKEN + "/sendMessage", {
-    method: "post", contentType: "application/json", muteHttpExceptions: true,
-    payload: JSON.stringify({ chat_id: TELEGRAM_CHAT_ID, text: msg, parse_mode: "Markdown", disable_web_page_preview: true })
-  });
-}
-
-function updateRekapLaporanFull() {
-  var doc = SpreadsheetApp.getActiveSpreadsheet();
-  var sDaily = doc.getSheetByName("Report Daily");
-  var sMati = doc.getSheetByName("Report Kematian");
-  var sRekap = doc.getSheetByName("Rekap Laporan Full") || doc.insertSheet("Rekap Laporan Full");
-  if (!sDaily) return;
-  
-  sRekap.clear();
-  var h = ["ID Periode", "Tanggal", "Umur Hari", "Pakan Atas", "Pakan Bawah", "ABW 1", "Foto 1", "ABW 2", "Foto 2", "ABW 3", "Foto 3", "ABW 4", "Foto 4"];
-  for (var i = 1; i <= 24; i++) h.push("Jam " + i);
-  h.push("Total Mati");
-  
-  var dData = sDaily.getDataRange().getValues();
-  var mData = sMati ? sMati.getDataRange().getValues() : [];
-  var batchData = [h];
-
-  for (var i = 1; i < dData.length; i++) {
-    var id_periode = dData[i][1];
-    var tgl = formatDate(dData[i][2]);
-    var row = [id_periode, tgl, dData[i][3], dData[i][4], dData[i][5], dData[i][6], dData[i][7], dData[i][8], dData[i][9], dData[i][10], dData[i][11], dData[i][12], dData[i][13]];
-    var totalMati = 0;
-    var jamData = Array(24).fill("");
-    
-    for (var j = 1; j < mData.length; j++) {
-      if (formatDate(mData[j][2]) === tgl && mData[j][1] === id_periode) {
-        for (var k = 0; k < 24; k++) {
-          if (mData[j][k + 3]) {
-            jamData[k] = mData[j][k + 3];
-            var match = mData[j][k + 3].toString().match(/Mati:\s*(\d+)/);
-            if (match) totalMati += parseInt(match[1]);
-          }
-        }
-      }
-    }
-    batchData.push(row.concat(jamData).concat([totalMati]));
-  }
-  
-  if (batchData.length > 0) sRekap.getRange(1, 1, batchData.length, batchData[0].length).setValues(batchData);
-}
-
-function sendMasterDailyReportToTelegram(tgl, periode, umurAyam) {
-  var doc = SpreadsheetApp.getActiveSpreadsheet();
-  var targetTgl = formatDate(tgl);
-  var formattedDateNum = Utilities.formatDate(new Date(tgl), Session.getScriptTimeZone(), "dd MMMM yyyy");
-  var dailyRow = null, pakanList = [], matiSummaryList = [], totalMati24Jam = 0;
-  
-  var sDaily = doc.getSheetByName("Report Daily");
-  if (sDaily) {
-    var dData = sDaily.getDataRange().getValues();
-    for (var i = dData.length - 1; i >= 1; i--) {
-      if (formatDate(dData[i][2]) === targetTgl && dData[i][1] === periode) { dailyRow = dData[i]; break; }
-    }
-  }
-
-  var sPakan = doc.getSheetByName("Report Pakan");
-  if (sPakan) {
-    var pData = sPakan.getDataRange().getValues();
-    for (var i = 1; i < pData.length; i++) {
-      if (formatDate(pData[i][2]) === targetTgl && pData[i][1] === periode) {
-        pakanList.push(`• ${pData[i][3]} : ${pData[i][5]} Zak (${pData[i][6]} Kg)`);
-      }
-    }
-  }
-
-  var sMati = doc.getSheetByName("Report Kematian");
-  if (sMati) {
-    var mData = sMati.getDataRange().getValues();
-    for (var i = 1; i < mData.length; i++) {
-      if (formatDate(mData[i][2]) === targetTgl && mData[i][1] === periode) {
-        for (var k = 0; k < 24; k++) {
-          var cellVal = mData[i][k + 3];
-          if (cellVal && cellVal.toString().trim() !== "") {
-            var matchMati = cellVal.toString().match(/Mati:\s*(\d+)/);
-            if (matchMati) {
-              totalMati24Jam += parseInt(matchMati[1]);
-              var namaPelapor = (cellVal.toString().match(/Pelapor:\s*([^\n]+)/) || [])[1] || "Staff";
-              var fotoLinks = (cellVal.toString().match(/Foto:\s*(.+)$/) || [])[1] || "";
-              matiSummaryList.push(`• Jam ${k + 1} (${namaPelapor}) : ${matchMati[1]} ekor ${fotoLinks ? '— ' + fotoLinks : ''}`);
-            }
-          }
-        }
-      }
-    }
-  }
-
-  var msg = `📊 *MASTER LAPORAN HARIAN*\nNadz Farm | ${periode}\nTanggal: ${formattedDateNum}\n────────────────\n\n`;
-  msg += `*1. OPERASIONAL HARIAN*\n`;
-  if (dailyRow) {
-    msg += `• Usia Ayam : *${umurAyam || dailyRow[3]} hari*\n` +
-           `• Pakan (Atas/Bawah) : *${dailyRow[4]} / ${dailyRow[5]} karung*\n` +
-           `• Timbangan ABW :\n` +
-           `  - Sekat 1 : ${dailyRow[6]||0}g ${dailyRow[7] ? '— ' + dailyRow[7] : ''}\n` +
-           `  - Sekat 2 : ${dailyRow[8]||0}g ${dailyRow[9] ? '— ' + dailyRow[9] : ''}\n` +
-           `  - Sekat 3 : ${dailyRow[10]||0}g ${dailyRow[11] ? '— ' + dailyRow[11] : ''}\n` +
-           `  - Sekat 4 : ${dailyRow[12]||0}g ${dailyRow[13] ? '— ' + dailyRow[13] : ''}\n\n`;
-  } else { msg += "_Belum ada data ABW._\n\n"; }
-
-  msg += `*2. PEMASUKAN PAKAN*\n`;
-  msg += pakanList.length > 0 ? pakanList.join("\n") + "\n\n" : "• _Tidak ada_\n\n";
-
-  msg += `*3. KEMATIAN 24 JAM*\n`;
-  msg += matiSummaryList.length > 0 ? matiSummaryList.join("\n") + `\n\n*Total: ${totalMati24Jam} ekor*` : "• _Nihil_";
-
-  sendTelegramMessageMarkdown(msg);
-}
-
-function handleTelegramCommand(msg) {
-  var text = msg.text.trim().toLowerCase();
-  var chatId = msg.chat.id;
-  
-  if (text === "/ping") {
-    UrlFetchApp.fetch("https://api.telegram.org/bot" + TELEGRAM_BOT_TOKEN + "/sendMessage", {
-      method: "post", contentType: "application/json", payload: JSON.stringify({ chat_id: chatId, text: "Pong! Online." })
-    });
-  }
-  else if (text === "/periode") {
-    var periodeList = getAllPeriode();
-    var msg = "📅 *DAFTAR PERIODE*\n\n";
-    periodeList.forEach(function(p) { msg += `• ${p.id_periode} (Masuk: ${p.tanggal_masuk})\n`; });
-    UrlFetchApp.fetch("https://api.telegram.org/bot" + TELEGRAM_BOT_TOKEN + "/sendMessage", {
-      method: "post", contentType: "application/json", payload: JSON.stringify({ chat_id: chatId, text: msg, parse_mode: "Markdown" })
-    });
-  }
-}';
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxQDTBNX4lh7UH1ArW7Ys1nA9aNk3SQKu4yI80Al0apM0gn4JY4F9D86CuuyaSPJ6gV/exec';
     const VALID_USERNAME = 'admin';
     const VALID_PASSWORD = 'ayamberkah12';
 
-    // LOGIN
+    // LOGIN FUNCTIONS
     function togglePassword() {
         const input = document.getElementById('password');
         const toggle = document.querySelector('.password-toggle');
         if (input.type === 'password') { input.type = 'text'; toggle.textContent = 'Hide'; }
         else { input.type = 'password'; toggle.textContent = 'Show'; }
     }
-    function showAlert(msg, type) {
-        const alert = document.getElementById('alert');
-        alert.className = 'alert show ' + type;
-        alert.innerHTML = msg;
-        setTimeout(() => alert.classList.remove('show'), 3000);
-    }
+    
     function handleLogin(e) {
         e.preventDefault();
         const username = document.getElementById('username').value.trim();
         const password = document.getElementById('password').value;
+        
         if (username === VALID_USERNAME && password === VALID_PASSWORD) {
-            localStorage.setItem('nadz_farm_session', JSON.stringify({ username, login_time: new Date().toISOString() }));
+            localStorage.setItem('nadz_session', JSON.stringify({ username, login_time: new Date().toISOString() }));
             showDashboard(username);
         } else {
-            showAlert('Username atau password salah!', 'error');
+            const alert = document.getElementById('alert');
+            alert.className = 'alert show error';
+            alert.textContent = 'Username atau password salah!';
+            setTimeout(() => alert.classList.remove('show'), 3000);
         }
     }
+    
     function showDashboard(username) {
         document.getElementById('loginPage').style.display = 'none';
         document.getElementById('dashboardPage').style.display = 'block';
@@ -876,13 +187,15 @@ function handleTelegramCommand(msg) {
         loadFilterPeriode();
         loadDashboard();
     }
+    
     function logout() {
-        localStorage.removeItem('nadz_farm_session');
+        localStorage.removeItem('nadz_session');
         document.getElementById('dashboardPage').style.display = 'none';
         document.getElementById('loginPage').style.display = 'block';
     }
+    
     function checkSession() {
-        const session = localStorage.getItem('nadz_farm_session');
+        const session = localStorage.getItem('nadz_session');
         if (session) {
             const data = JSON.parse(session);
             const diffHours = (new Date() - new Date(data.login_time)) / (1000 * 60 * 60);
@@ -890,7 +203,7 @@ function handleTelegramCommand(msg) {
         }
     }
 
-    // TABS
+    // TAB FUNCTIONS
     document.querySelectorAll('.tab-btn').forEach(btn => {
         btn.addEventListener('click', function() {
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -900,7 +213,7 @@ function handleTelegramCommand(msg) {
         });
     });
 
-    // FOTO
+    // FOTO FUNCTIONS
     function openModal(url) {
         document.getElementById('modalImage').src = url;
         document.getElementById('fotoModal').classList.add('active');
@@ -912,21 +225,21 @@ function handleTelegramCommand(msg) {
         return str.split(',').map(u => u.trim()).filter(u => u.indexOf('http') === 0);
     }
 
-    function createFotoLinks(str, label) {
-        const urls = parseFotoUrls(str);
-        if (urls.length === 0) return '';
-        return urls.map((u, i) => `${label} ${i+1} (<a href="${u}" target="_blank">${u}</a>)`).join(', ');
-    }
-
     function createFotoThumbnails(str) {
         const urls = parseFotoUrls(str);
         if (urls.length === 0) return '<span style="color:#9aa5b1;">-</span>';
         let html = '<div class="foto-grid">';
         urls.forEach(url => {
-            html += `<div class="foto-item" onclick="openModal('${url}')"><img src="${url}" loading="lazy"></div>`;
+            html += `<div class="foto-item" onclick="openModal('${url}')"><img src="${url}" loading="lazy" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2260%22 height=%2260%22%3E%3Crect fill=%22%23e8ecf1%22 width=%2260%22 height=%2260%22/%3E%3Ctext x=%2230%22 y=%2235%22 text-anchor=%22middle%22 font-size=%2210%22 fill=%22%239aa5b1%22%3ENo Foto%3C/text%3E%3C/svg%3E'"></div>`;
         });
         html += '</div>';
         return html;
+    }
+
+    function createFotoLinks(str) {
+        const urls = parseFotoUrls(str);
+        if (urls.length === 0) return '-';
+        return urls.map((u, i) => `<a href="${u}" target="_blank" class="foto-link">Foto ${i+1}</a>`).join(', ');
     }
 
     // LOAD PERIODE
@@ -944,13 +257,12 @@ function handleTelegramCommand(msg) {
                     select.appendChild(opt);
                 });
             }
-        } catch (e) { console.error('Gagal load periode:', e); }
+        } catch (e) { console.error(e); }
     }
 
     // LOAD DASHBOARD
     async function loadDashboard() {
         const periode = document.getElementById('filterPeriode').value;
-        const tanggal = document.getElementById('filterTanggal').value;
         let url = SCRIPT_URL + '?action=getAll';
         if (periode) url += '&periode=' + encodeURIComponent(periode);
         
@@ -958,155 +270,73 @@ function handleTelegramCommand(msg) {
             const response = await fetch(url);
             const result = await response.json();
             if (result.status === 'success') {
-                displayStats(result.data);
-                displayMasterReport(result.data, tanggal);
-                displayTableData(result.data);
+                displayPakanData(result.data.filter(i => i.sheet === 'Pakan'));
+                displayDailyData(result.data.filter(i => i.sheet === 'Daily'));
             }
-        } catch (e) { console.error('Error:', e); }
+        } catch (e) { console.error(e); }
     }
 
-    // STATS
-    function displayStats(data) {
-        let totalDaily = 0, totalPakan = 0, totalMati = 0, totalAbw = 0, abwCount = 0;
-        data.forEach(item => {
-            if (item.sheet === 'Daily') {
-                totalDaily++;
-                const abw = (parseFloat(item.abw_sekat1) + parseFloat(item.abw_sekat2) + parseFloat(item.abw_sekat3) + parseFloat(item.abw_sekat4)) / 4;
-                if (abw > 0) { totalAbw += abw; abwCount++; }
-                totalMati += parseInt(item.jumlah_mati) || 0;
-            } else if (item.sheet === 'Pakan') totalPakan++;
+    // DISPLAY PAKAN
+    function displayPakanData(pakanData) {
+        const content = document.getElementById('pakanContent');
+        
+        if (pakanData.length === 0) {
+            content.innerHTML = '<div style="text-align:center;padding:40px;color:#7f8c8d;">Belum ada data pakan.</div>';
+            return;
+        }
+        
+        let html = '<div class="card"><h2>Riwayat Pakan Masuk</h2><div style="overflow-x:auto;"><table>';
+        html += '<thead><tr><th>Tanggal</th><th>Periode</th><th>Sumber</th><th>PO</th><th>Zak</th><th>Kg</th><th>Kendaraan</th><th>Deskripsi</th><th>Dokumentasi</th></tr></thead><tbody>';
+        
+        pakanData.forEach(item => {
+            html += '<tr>';
+            html += `<td>${item.tanggal}</td>`;
+            html += `<td>${item.id_periode}</td>`;
+            html += `<td>${item.sumber_pakan}</td>`;
+            html += `<td>${item.no_po || '-'}</td>`;
+            html += `<td>${item.jumlah_zak}</td>`;
+            html += `<td>${item.jumlah_kg}</td>`;
+            html += `<td>${item.kendaraan || '-'}</td>`;
+            html += `<td>${item.deskripsi || '-'}</td>`;
+            html += `<td>${createFotoThumbnails(item.dokumentasi)}</td>`;
+            html += '</tr>';
         });
-        document.getElementById('totalDaily').textContent = totalDaily;
-        document.getElementById('totalPakan').textContent = totalPakan;
-        document.getElementById('totalMati').textContent = totalMati;
-        document.getElementById('avgAbw').textContent = abwCount > 0 ? Math.round(totalAbw / abwCount) + 'g' : '0g';
+        
+        html += '</tbody></table></div></div>';
+        content.innerHTML = html;
     }
 
-    // MASTER REPORT
-    function displayMasterReport(data, filterTanggal) {
-        const content = document.getElementById('masterReportContent');
-        const dailyData = data.filter(i => i.sheet === 'Daily');
+    // DISPLAY DAILY
+    function displayDailyData(dailyData) {
+        const content = document.getElementById('dailyContent');
         
         if (dailyData.length === 0) {
             content.innerHTML = '<div style="text-align:center;padding:40px;color:#7f8c8d;">Belum ada data harian.</div>';
             return;
         }
         
-        // Filter by tanggal jika ada
-        let items = dailyData;
-        if (filterTanggal) {
-            items = dailyData.filter(i => i.tanggal === filterTanggal);
-        }
+        let html = '<div class="card"><h2>Laporan Harian</h2><div style="overflow-x:auto;"><table>';
+        html += '<thead><tr><th>Tanggal</th><th>Periode</th><th>Umur</th><th>ABW 1</th><th>Foto 1</th><th>ABW 2</th><th>Foto 2</th><th>ABW 3</th><th>Foto 3</th><th>ABW 4</th><th>Foto 4</th><th>Kematian</th></tr></thead><tbody>';
         
-        let html = '';
-        
-        items.forEach(item => {
-            const dateObj = new Date(item.tanggal);
-            const formattedDate = dateObj.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
-            
-            // Kumpulkan data pakan untuk tanggal ini
-            const pakanItems = data.filter(i => i.sheet === 'Pakan' && i.tanggal === item.tanggal && i.id_periode === item.id_periode);
-            
-            // Kumpulkan data kematian
-            const fotoMati = parseFotoUrls(item.foto_kematian);
-            
-            html += `<div class="master-report">`;
-            html += `<div class="title">MASTER LAPORAN HARIAN & REKAP 24 JAM</div>`;
-            html += `<div class="farm-name">Nadz Farm's</div>`;
-            html += `<div class="date">Tanggal: ${formattedDate}</div>`;
-            html += `<div class="divider"></div>`;
-            
-            // 1. RINGKASAN OPERASIONAL
-            html += `<div class="section-title">1. RINGKASAN OPERASIONAL HARIAN</div>`;
-            html += `<div class="item">Usia Ayam : ${item.umur_hari} hari</div>`;
-            html += `<div class="item">Pakan Atas : ${item.pakan_atas} karung</div>`;
-            html += `<div class="item">Pakan Bawah : ${item.pakan_bawah} karung</div>`;
-            html += `<div class="item">Timbangan ABW :</div>`;
-            
-            // Sekat 1-4 dengan foto
-            const sekats = [
-                { nama: 'Sekat 1', abw: item.abw_sekat1, foto: item.foto_sekat1 },
-                { nama: 'Sekat 2', abw: item.abw_sekat2, foto: item.foto_sekat2 },
-                { nama: 'Sekat 3', abw: item.abw_sekat3, foto: item.foto_sekat3 },
-                { nama: 'Sekat 4', abw: item.abw_sekat4, foto: item.foto_sekat4 }
-            ];
-            
-            sekats.forEach(s => {
-                const fotoLinks = createFotoLinks(s.foto, 'Foto');
-                html += `<div class="item" style="margin-left:20px;">- ${s.nama} : ${s.abw}g ${fotoLinks ? '— ' + fotoLinks : ''}</div>`;
-            });
-            
-            html += `<div class="divider"></div>`;
-            
-            // 2. PEMASUKAN PAKAN
-            html += `<div class="section-title">2. PEMASUKAN PAKAN</div>`;
-            if (pakanItems.length > 0) {
-                pakanItems.forEach(p => {
-                    html += `<div class="item">• ${p.sumber_pakan} : ${p.jumlah_zak} Zak (${p.jumlah_kg} Kg)</div>`;
-                    const fotoLinks = createFotoLinks(p.dokumentasi, 'Bukti');
-                    if (fotoLinks) html += `<div class="item" style="margin-left:20px;">Dokumentasi : ${fotoLinks}</div>`;
-                });
-            } else {
-                html += `<div class="item">• Tidak ada pakan masuk</div>`;
-            }
-            
-            html += `<div class="divider"></div>`;
-            
-            // 3. KEMATIAN 24 JAM
-            html += `<div class="section-title">3. KEMATIAN 24 JAM</div>`;
-            if (item.jam) {
-                const jamList = item.jam.split(';');
-                jamList.forEach(j => {
-                    html += `<div class="item">• ${j} ekor</div>`;
-                });
-            } else {
-                html += `<div class="item">• Nihil</div>`;
-            }
-            
-            html += `<div class="total">Total Kematian 24 Jam : ${item.jumlah_mati} ekor</div>`;
-            
-            // Rekap eviden
-            if (fotoMati.length > 0) {
-                html += `<div class="item">• Rekap Seluruh Eviden : ${fotoMati.map((u, i) => `Eviden ${i+1} (<a href="${u}" target="_blank">${u}</a>)`).join(' | ')}</div>`;
-            }
-            
-            html += `</div>`;
+        dailyData.forEach(item => {
+            html += '<tr>';
+            html += `<td>${item.tanggal}</td>`;
+            html += `<td>${item.id_periode}</td>`;
+            html += `<td>${item.umur_hari} hari</td>`;
+            html += `<td>${item.abw_sekat1}g</td>`;
+            html += `<td>${createFotoThumbnails(item.foto_sekat1)}</td>`;
+            html += `<td>${item.abw_sekat2}g</td>`;
+            html += `<td>${createFotoThumbnails(item.foto_sekat2)}</td>`;
+            html += `<td>${item.abw_sekat3}g</td>`;
+            html += `<td>${createFotoThumbnails(item.foto_sekat3)}</td>`;
+            html += `<td>${item.abw_sekat4}g</td>`;
+            html += `<td>${createFotoThumbnails(item.foto_sekat4)}</td>`;
+            html += `<td style="color:#e74c3c;font-weight:600;">${item.jumlah_mati} ekor</td>`;
+            html += '</tr>';
         });
         
+        html += '</tbody></table></div></div>';
         content.innerHTML = html;
-    }
-
-    // TABLE DATA
-    function displayTableData(data) {
-        const content = document.getElementById('dashboardContent');
-        let html = '';
-        
-        const dailyData = data.filter(item => item.sheet === 'Daily');
-        if (dailyData.length > 0) {
-            html += '<div class="card"><h2>Laporan Harian</h2><div style="overflow-x:auto;"><table>';
-            html += '<thead><tr><th>Tanggal</th><th>Periode</th><th>Umur</th><th>ABW 1</th><th>Foto 1</th><th>ABW 2</th><th>Foto 2</th><th>ABW 3</th><th>Foto 3</th><th>ABW 4</th><th>Foto 4</th><th>Kematian</th></tr></thead><tbody>';
-            dailyData.forEach(item => {
-                html += `<tr><td>${item.tanggal}</td><td>${item.id_periode}</td><td>${item.umur_hari} hari</td>`;
-                html += `<td>${item.abw_sekat1}g</td><td>${createFotoThumbnails(item.foto_sekat1)}</td>`;
-                html += `<td>${item.abw_sekat2}g</td><td>${createFotoThumbnails(item.foto_sekat2)}</td>`;
-                html += `<td>${item.abw_sekat3}g</td><td>${createFotoThumbnails(item.foto_sekat3)}</td>`;
-                html += `<td>${item.abw_sekat4}g</td><td>${createFotoThumbnails(item.foto_sekat4)}</td>`;
-                html += `<td style="color:#e74c3c;font-weight:600;">${item.jumlah_mati} ekor</td></tr>`;
-            });
-            html += '</tbody></table></div></div>';
-        }
-        
-        const pakanData = data.filter(item => item.sheet === 'Pakan');
-        if (pakanData.length > 0) {
-            html += '<div class="card"><h2>Riwayat Pakan</h2><div style="overflow-x:auto;"><table>';
-            html += '<thead><tr><th>Tanggal</th><th>Periode</th><th>Sumber</th><th>Zak</th><th>Kg</th><th>Dokumentasi</th></tr></thead><tbody>';
-            pakanData.forEach(item => {
-                html += `<tr><td>${item.tanggal}</td><td>${item.id_periode}</td><td>${item.sumber_pakan}</td><td>${item.jumlah_zak}</td><td>${item.jumlah_kg}</td><td>${createFotoThumbnails(item.dokumentasi)}</td></tr>`;
-            });
-            html += '</tbody></table></div></div>';
-        }
-        
-        content.innerHTML = html || '<div style="text-align:center;padding:40px;color:#7f8c8d;">Belum ada data.</div>';
     }
 
     // INIT

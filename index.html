@@ -8,34 +8,10 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif; background: #f0f2f5; min-height: 100vh; padding: 20px; color: #1a1a2e; }
         
-        /* LOGIN PAGE */
-        .login-container {
-            max-width: 400px;
-            margin: 50px auto;
-            background: white;
-            border-radius: 16px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-            overflow: hidden;
-        }
-        .login-header {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            color: white;
-            padding: 35px 30px;
-            text-align: center;
-        }
-        .login-header .logo {
-            width: 70px;
-            height: 70px;
-            background: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 15px;
-            font-size: 28px;
-            font-weight: 700;
-            color: #1a1a2e;
-        }
+        /* LOGIN */
+        .login-container { max-width: 400px; margin: 50px auto; background: white; border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); overflow: hidden; }
+        .login-header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: white; padding: 35px 30px; text-align: center; }
+        .login-header .logo { width: 70px; height: 70px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px; font-size: 28px; font-weight: 700; color: #1a1a2e; }
         .login-header h1 { font-size: 22px; font-weight: 700; margin-bottom: 5px; }
         .login-header p { font-size: 13px; opacity: 0.7; }
         .login-body { padding: 30px; }
@@ -43,477 +19,451 @@
         .form-group label { display: block; margin-bottom: 8px; font-weight: 600; font-size: 13px; color: #2c3e50; }
         .input-group { position: relative; }
         .input-group .icon { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); font-size: 16px; color: #9aa5b1; }
-        .input-group input {
-            width: 100%;
-            padding: 12px 15px 12px 45px;
-            border: 2px solid #e8ecf1;
-            border-radius: 10px;
-            font-size: 15px;
-            transition: all 0.3s;
-            background: #fafbfc;
-        }
+        .input-group input { width: 100%; padding: 12px 15px 12px 45px; border: 2px solid #e8ecf1; border-radius: 10px; font-size: 15px; transition: all 0.3s; background: #fafbfc; }
         .input-group input:focus { outline: none; border-color: #1a1a2e; background: white; box-shadow: 0 0 0 3px rgba(26, 26, 46, 0.05); }
         .password-toggle { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 13px; color: #9aa5b1; user-select: none; }
-        .password-toggle:hover { color: #1a1a2e; }
-        .remember-forgot { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-        .checkbox-group { display: flex; align-items: center; gap: 8px; cursor: pointer; }
-        .checkbox-group input[type="checkbox"] { width: 16px; height: 16px; cursor: pointer; }
-        .checkbox-group label { font-size: 13px; color: #5d6d7e; cursor: pointer; margin-bottom: 0; }
-        .btn-login {
-            width: 100%;
-            padding: 14px;
-            background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%);
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-size: 15px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s;
-            letter-spacing: 0.5px;
-        }
+        .btn-login { width: 100%; padding: 14px; background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%); color: white; border: none; border-radius: 10px; font-size: 15px; font-weight: 700; cursor: pointer; }
         .btn-login:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(26, 26, 46, 0.2); }
-        .btn-login:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
-        .alert {
-            padding: 12px 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            display: none;
-            font-size: 13px;
-            font-weight: 500;
-            animation: slideDown 0.3s ease;
-        }
-        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        .alert { padding: 12px 15px; border-radius: 8px; margin-bottom: 20px; display: none; font-size: 13px; font-weight: 500; }
         .alert.show { display: flex; align-items: center; gap: 10px; }
         .alert.error { background: #fdf2f2; color: #a93226; border-left: 4px solid #e74c3c; }
-        .alert.success { background: #eafaf1; color: #1a7a42; border-left: 4px solid #2ecc71; }
-        .loading-spinner {
-            display: none;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255,255,255,0.3);
-            border-top-color: white;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-            margin: 0 auto;
-        }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         
         /* DASHBOARD */
-        .dashboard-container { display: none; max-width: 1200px; margin: 0 auto; }
-        .header {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            color: white;
-            padding: 20px 28px;
-            border-radius: 12px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-bottom: 20px;
-        }
+        .dashboard-container { display: none; max-width: 1400px; margin: 0 auto; }
+        .header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: white; padding: 20px 28px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; }
         .header .brand h1 { font-size: 22px; font-weight: 700; }
         .header .brand .sub { font-size: 11px; opacity: 0.6; text-transform: uppercase; letter-spacing: 1px; }
         .header .user-info { display: flex; align-items: center; gap: 15px; }
-        .header .user-info .username { font-size: 14px; font-weight: 600; }
-        .btn-logout {
-            background: #e74c3c;
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 13px;
-        }
-        .btn-logout:hover { background: #c0392b; }
-        .btn-refresh { background: #2ecc71; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: 600; }
-        .btn-refresh:hover { background: #27ae60; }
+        .btn-logout { background: #e74c3c; color: white; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 13px; }
+        .btn-refresh { background: #2ecc71; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: 600; margin-bottom: 20px; }
+        
+        /* TABS */
+        .tabs { display: flex; gap: 4px; margin-bottom: 20px; border-bottom: 2px solid #e8ecf1; flex-wrap: wrap; }
+        .tab-btn { padding: 10px 22px; border: none; background: transparent; color: #7f8c8d; font-weight: 600; font-size: 14px; cursor: pointer; border-bottom: 3px solid transparent; margin-bottom: -2px; }
+        .tab-btn.active { color: #1a1a2e; border-bottom-color: #1a1a2e; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fade 0.3s ease; }
+        @keyframes fade { 0% { opacity: 0; } 100% { opacity: 1; } }
+        
         .filter-box { background: white; padding: 20px; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
-        .filter-box select, .filter-box input { padding: 10px; border: 2px solid #e8ecf1; border-radius: 8px; font-size: 14px; margin-right: 10px; }
+        .filter-box select { padding: 10px; border: 2px solid #e8ecf1; border-radius: 8px; font-size: 14px; margin-right: 10px; }
         .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 20px; }
         .stat-card { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
-        .stat-card .label { font-size: 12px; color: #7f8c8d; text-transform: uppercase; letter-spacing: 0.5px; }
+        .stat-card .label { font-size: 12px; color: #7f8c8d; text-transform: uppercase; }
         .stat-card .value { font-size: 28px; font-weight: 700; margin-top: 8px; }
         .stat-card .value.green { color: #2ecc71; }
         .stat-card .value.red { color: #e74c3c; }
         .stat-card .value.blue { color: #3498db; }
+        
         .card { background: white; padding: 20px; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
         .card h2 { font-size: 18px; margin-bottom: 16px; }
+        
+        /* MASTER REPORT */
+        .master-report { background: white; padding: 30px; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .master-report .title { text-align: center; font-size: 20px; font-weight: 700; margin-bottom: 5px; }
+        .master-report .farm-name { text-align: center; font-size: 16px; font-weight: 600; color: #1a1a2e; margin-bottom: 5px; }
+        .master-report .date { text-align: center; font-size: 14px; color: #5d6d7e; margin-bottom: 20px; }
+        .master-report .divider { border-top: 2px solid #e8ecf1; margin: 20px 0; }
+        .master-report .section-title { font-weight: 700; font-size: 15px; margin-bottom: 10px; color: #1a1a2e; }
+        .master-report .item { padding: 8px 0; font-size: 14px; }
+        .master-report .item a { color: #3498db; text-decoration: none; }
+        .master-report .item a:hover { text-decoration: underline; }
+        .master-report .total { font-weight: 700; font-size: 16px; margin-top: 10px; }
+        
         table { width: 100%; border-collapse: collapse; }
         th, td { padding: 12px; text-align: left; border-bottom: 1px solid #e8ecf1; font-size: 14px; }
         th { background: #f8f9fc; font-weight: 700; color: #2c3e50; }
         tr:hover { background: #f8f9fc; }
+        
+        .foto-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(60px, 1fr)); gap: 6px; }
+        .foto-item { width: 60px; height: 60px; border-radius: 6px; overflow: hidden; cursor: pointer; }
+        .foto-item img { width: 100%; height: 100%; object-fit: cover; }
+        
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 1000; justify-content: center; align-items: center; cursor: pointer; }
+        .modal.active { display: flex; }
+        .modal img { max-width: 90%; max-height: 90%; border-radius: 8px; }
+        .modal .close { position: absolute; top: 20px; right: 20px; color: white; font-size: 30px; cursor: pointer; }
+        
         .loading { text-align: center; padding: 40px; }
         .spinner { width: 40px; height: 40px; border: 4px solid #e8ecf1; border-top-color: #1a1a2e; border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 10px; }
-        @media (max-width: 768px) { .header { flex-direction: column; align-items: stretch; } }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
 
-    <!-- LOGIN PAGE -->
-    <div class="login-container" id="loginPage">
-        <div class="login-header">
-            <div class="logo">NF</div>
+<!-- LOGIN -->
+<div class="login-container" id="loginPage">
+    <div class="login-header">
+        <div class="logo">NF</div>
+        <h1>Nadz Farm's</h1>
+        <p>Sistem Manajemen Peternakan</p>
+    </div>
+    <div class="login-body">
+        <div id="alert" class="alert"></div>
+        <form onsubmit="handleLogin(event)">
+            <div class="form-group">
+                <label>Username</label>
+                <div class="input-group">
+                    <span class="icon">&#128100;</span>
+                    <input type="text" id="username" placeholder="Masukkan username" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <div class="input-group">
+                    <span class="icon">&#128274;</span>
+                    <input type="password" id="password" placeholder="Masukkan password" required>
+                    <span class="password-toggle" onclick="togglePassword()">Show</span>
+                </div>
+            </div>
+            <button type="submit" class="btn-login">Masuk</button>
+        </form>
+    </div>
+</div>
+
+<!-- DASHBOARD -->
+<div class="dashboard-container" id="dashboardPage">
+    <div class="header">
+        <div class="brand">
             <h1>Nadz Farm's</h1>
-            <p>Sistem Manajemen Peternakan</p>
+            <div class="sub">Dashboard Monitoring</div>
         </div>
-        
-        <div class="login-body">
-            <div id="alert" class="alert"></div>
-            
-            <form id="loginForm" onsubmit="handleLogin(event)">
-                <div class="form-group">
-                    <label for="username">Username</label>
-                    <div class="input-group">
-                        <span class="icon">&#128100;</span>
-                        <input type="text" id="username" placeholder="Masukkan username" required autocomplete="username">
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <div class="input-group">
-                        <span class="icon">&#128274;</span>
-                        <input type="password" id="password" placeholder="Masukkan password" required autocomplete="current-password">
-                        <span class="password-toggle" onclick="togglePassword()">Show</span>
-                    </div>
-                </div>
-                
-                <div class="remember-forgot">
-                    <div class="checkbox-group">
-                        <input type="checkbox" id="rememberMe" checked>
-                        <label for="rememberMe">Ingat saya</label>
-                    </div>
-                </div>
-                
-                <button type="submit" class="btn-login" id="loginBtn">
-                    <span id="btnText">Masuk</span>
-                    <div class="loading-spinner" id="loadingSpinner"></div>
-                </button>
-            </form>
+        <div class="user-info">
+            <span id="displayUsername"></span>
+            <button class="btn-logout" onclick="logout()">Keluar</button>
         </div>
     </div>
 
-    <!-- DASHBOARD -->
-    <div class="dashboard-container" id="dashboardPage">
-        <div class="header">
-            <div class="brand">
-                <h1>Nadz Farm's</h1>
-                <div class="sub">Dashboard Monitoring</div>
-            </div>
-            <div class="user-info">
-                <span class="username" id="displayUsername"></span>
-                <button class="btn-logout" onclick="logout()">Keluar</button>
-            </div>
+    <button class="btn-refresh" onclick="loadDashboard()">Refresh Data</button>
+
+    <!-- TABS -->
+    <div class="tabs">
+        <button class="tab-btn active" data-tab="master">Master Laporan Harian</button>
+        <button class="tab-btn" data-tab="tabel">Tabel Data</button>
+    </div>
+
+    <!-- FILTER -->
+    <div class="filter-box">
+        <label style="font-weight: 600; margin-right: 10px;">Filter Periode:</label>
+        <select id="filterPeriode" onchange="loadDashboard()">
+            <option value="">Semua Periode</option>
+        </select>
+        <label style="font-weight: 600; margin: 0 10px;">Tanggal:</label>
+        <input type="date" id="filterTanggal" onchange="loadDashboard()">
+    </div>
+
+    <!-- STATS -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="label">Total Data Harian</div>
+            <div class="value blue" id="totalDaily">0</div>
         </div>
-
-        <button class="btn-refresh" onclick="loadDashboard()" style="margin-bottom: 20px;">Refresh Data</button>
-
-        <div class="filter-box">
-            <label style="font-weight: 600; margin-right: 10px;">Filter Periode:</label>
-            <select id="filterPeriode" onchange="loadDashboard()">
-                <option value="">Semua Periode</option>
-            </select>
+        <div class="stat-card">
+            <div class="label">Total Pakan Masuk</div>
+            <div class="value green" id="totalPakan">0</div>
         </div>
-
-        <div class="stats-grid">
-            <div class="stat-card">
-                <div class="label">Total Data Harian</div>
-                <div class="value blue" id="totalDaily">0</div>
-            </div>
-            <div class="stat-card">
-                <div class="label">Total Pakan Masuk</div>
-                <div class="value green" id="totalPakan">0</div>
-            </div>
-            <div class="stat-card">
-                <div class="label">Total Kematian</div>
-                <div class="value red" id="totalMati">0</div>
-            </div>
-            <div class="stat-card">
-                <div class="label">Rata-rata ABW</div>
-                <div class="value blue" id="avgAbw">0g</div>
-            </div>
+        <div class="stat-card">
+            <div class="label">Total Kematian</div>
+            <div class="value red" id="totalMati">0</div>
         </div>
+        <div class="stat-card">
+            <div class="label">Rata-rata ABW</div>
+            <div class="value blue" id="avgAbw">0g</div>
+        </div>
+    </div>
 
+    <!-- TAB CONTENT -->
+    <div id="tab-master" class="tab-content active">
+        <div id="masterReportContent">
+            <div class="loading"><div class="spinner"></div><div>Memuat data...</div></div>
+        </div>
+    </div>
+
+    <div id="tab-tabel" class="tab-content">
         <div id="dashboardContent">
-            <div class="loading">
-                <div class="spinner"></div>
-                <div>Memuat data...</div>
-            </div>
+            <div class="loading"><div class="spinner"></div><div>Memuat data...</div></div>
         </div>
     </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal" id="fotoModal" onclick="closeModal()">
+    <span class="close">&times;</span>
+    <img id="modalImage" src="" alt="Foto">
+</div>
 
 <script>
-    // ==========================================
-    // KONFIGURASI
-    // ==========================================
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz9C-eJlVjHhskrP7T0fm8vB9_XwjYo8EMHYOzbMhsLFE0sfFw3j5jANRGSAcI5Wv9Q/exec';
-    
-    // USER LOGIN
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxQDTBNX4lh7UH1ArW7Ys1nA9aNk3SQKu4yI80Al0apM0gn4JY4F9D86CuuyaSPJ6gV/exec';
     const VALID_USERNAME = 'admin';
     const VALID_PASSWORD = 'ayamberkah12';
 
-    // ==========================================
-    // FUNGSI LOGIN
-    // ==========================================
+    // LOGIN
     function togglePassword() {
-        const passwordInput = document.getElementById('password');
-        const toggleBtn = document.querySelector('.password-toggle');
-        
-        if (passwordInput.type === 'password') {
-            passwordInput.type = 'text';
-            toggleBtn.textContent = 'Hide';
-        } else {
-            passwordInput.type = 'password';
-            toggleBtn.textContent = 'Show';
-        }
+        const input = document.getElementById('password');
+        const toggle = document.querySelector('.password-toggle');
+        if (input.type === 'password') { input.type = 'text'; toggle.textContent = 'Hide'; }
+        else { input.type = 'password'; toggle.textContent = 'Show'; }
     }
-
-    function showAlert(message, type) {
+    function showAlert(msg, type) {
         const alert = document.getElementById('alert');
         alert.className = 'alert show ' + type;
-        alert.innerHTML = message;
-        clearTimeout(alert._timer);
-        alert._timer = setTimeout(() => alert.classList.remove('show'), 5000);
+        alert.innerHTML = msg;
+        setTimeout(() => alert.classList.remove('show'), 3000);
     }
-
-    function showLoading(isLoading) {
-        const btnText = document.getElementById('btnText');
-        const spinner = document.getElementById('loadingSpinner');
-        const loginBtn = document.getElementById('loginBtn');
-        
-        if (isLoading) {
-            btnText.style.display = 'none';
-            spinner.style.display = 'block';
-            loginBtn.disabled = true;
-        } else {
-            btnText.style.display = 'block';
-            spinner.style.display = 'none';
-            loginBtn.disabled = false;
-        }
-    }
-
-    function handleLogin(event) {
-        event.preventDefault();
-        
+    function handleLogin(e) {
+        e.preventDefault();
         const username = document.getElementById('username').value.trim();
         const password = document.getElementById('password').value;
-        const rememberMe = document.getElementById('rememberMe').checked;
-        
-        if (!username || !password) {
-            showAlert('Username dan password wajib diisi!', 'error');
-            return;
+        if (username === VALID_USERNAME && password === VALID_PASSWORD) {
+            localStorage.setItem('nadz_farm_session', JSON.stringify({ username, login_time: new Date().toISOString() }));
+            showDashboard(username);
+        } else {
+            showAlert('Username atau password salah!', 'error');
         }
-        
-        showLoading(true);
-        
-        setTimeout(() => {
-            if (username === VALID_USERNAME && password === VALID_PASSWORD) {
-                showLoading(false);
-                showAlert('Login berhasil!', 'success');
-                
-                // Simpan session
-                const sessionData = {
-                    username: username,
-                    login_time: new Date().toISOString()
-                };
-                
-                if (rememberMe) {
-                    localStorage.setItem('nadz_farm_session', JSON.stringify(sessionData));
-                } else {
-                    sessionStorage.setItem('nadz_farm_session', JSON.stringify(sessionData));
-                }
-                
-                // Tampilkan dashboard
-                setTimeout(() => {
-                    showDashboard(username);
-                }, 500);
-                
-            } else {
-                showLoading(false);
-                showAlert('Username atau password salah!', 'error');
-                document.getElementById('password').value = '';
-                document.getElementById('password').focus();
-            }
-        }, 800);
     }
-
     function showDashboard(username) {
         document.getElementById('loginPage').style.display = 'none';
         document.getElementById('dashboardPage').style.display = 'block';
         document.getElementById('displayUsername').textContent = username;
-        
-        // Load data dashboard
         loadFilterPeriode();
         loadDashboard();
     }
-
     function logout() {
         localStorage.removeItem('nadz_farm_session');
-        sessionStorage.removeItem('nadz_farm_session');
-        
         document.getElementById('dashboardPage').style.display = 'none';
         document.getElementById('loginPage').style.display = 'block';
-        
-        document.getElementById('username').value = '';
-        document.getElementById('password').value = '';
-        document.getElementById('username').focus();
     }
-
     function checkSession() {
-        const session = localStorage.getItem('nadz_farm_session') || 
-                       sessionStorage.getItem('nadz_farm_session');
-        
+        const session = localStorage.getItem('nadz_farm_session');
         if (session) {
             const data = JSON.parse(session);
-            const loginTime = new Date(data.login_time);
-            const now = new Date();
-            const diffHours = (now - loginTime) / (1000 * 60 * 60);
-            
-            if (diffHours < 168) { // 7 hari (168 jam)
-                showDashboard(data.username);
-            } else {
-                localStorage.removeItem('nadz_farm_session');
-                sessionStorage.removeItem('nadz_farm_session');
-            }
+            const diffHours = (new Date() - new Date(data.login_time)) / (1000 * 60 * 60);
+            if (diffHours < 168) showDashboard(data.username);
         }
     }
 
-    // ==========================================
-    // FUNGSI DASHBOARD
-    // ==========================================
+    // TABS
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            this.classList.add('active');
+            document.getElementById('tab-' + this.dataset.tab).classList.add('active');
+        });
+    });
+
+    // FOTO
+    function openModal(url) {
+        document.getElementById('modalImage').src = url;
+        document.getElementById('fotoModal').classList.add('active');
+    }
+    function closeModal() { document.getElementById('fotoModal').classList.remove('active'); }
+
+    function parseFotoUrls(str) {
+        if (!str || str === "Tidak ada dokumentasi") return [];
+        return str.split(',').map(u => u.trim()).filter(u => u.indexOf('http') === 0);
+    }
+
+    function createFotoLinks(str, label) {
+        const urls = parseFotoUrls(str);
+        if (urls.length === 0) return '';
+        return urls.map((u, i) => `${label} ${i+1} (<a href="${u}" target="_blank">${u}</a>)`).join(', ');
+    }
+
+    function createFotoThumbnails(str) {
+        const urls = parseFotoUrls(str);
+        if (urls.length === 0) return '<span style="color:#9aa5b1;">-</span>';
+        let html = '<div class="foto-grid">';
+        urls.forEach(url => {
+            html += `<div class="foto-item" onclick="openModal('${url}')"><img src="${url}" loading="lazy"></div>`;
+        });
+        html += '</div>';
+        return html;
+    }
+
+    // LOAD PERIODE
     async function loadFilterPeriode() {
         try {
             const response = await fetch(SCRIPT_URL + '?action=getPeriode');
             const result = await response.json();
-            
             if (result.status === 'success' && result.data) {
                 const select = document.getElementById('filterPeriode');
                 select.innerHTML = '<option value="">Semua Periode</option>';
-                
-                result.data.forEach(periode => {
-                    const option = document.createElement('option');
-                    option.value = periode.id_periode;
-                    option.textContent = periode.display_name || periode.id_periode;
-                    select.appendChild(option);
+                result.data.forEach(p => {
+                    const opt = document.createElement('option');
+                    opt.value = p.id_periode;
+                    opt.textContent = p.display_name || p.id_periode;
+                    select.appendChild(opt);
                 });
             }
-        } catch (error) {
-            console.error('Gagal load periode:', error);
-        }
+        } catch (e) { console.error('Gagal load periode:', e); }
     }
 
+    // LOAD DASHBOARD
     async function loadDashboard() {
-        const content = document.getElementById('dashboardContent');
-        content.innerHTML = '<div class="loading"><div class="spinner"></div><div>Memuat data...</div></div>';
+        const periode = document.getElementById('filterPeriode').value;
+        const tanggal = document.getElementById('filterTanggal').value;
+        let url = SCRIPT_URL + '?action=getAll';
+        if (periode) url += '&periode=' + encodeURIComponent(periode);
         
         try {
-            const periode = document.getElementById('filterPeriode').value;
-            let url = SCRIPT_URL + '?action=getAll';
-            if (periode) url += '&periode=' + encodeURIComponent(periode);
-            
             const response = await fetch(url);
             const result = await response.json();
-            
             if (result.status === 'success') {
-                displayDashboard(result.data);
-            } else {
-                content.innerHTML = '<div style="text-align: center; padding: 40px; color: #e74c3c;">Error: ' + (result.message || 'Gagal memuat data') + '</div>';
+                displayStats(result.data);
+                displayMasterReport(result.data, tanggal);
+                displayTableData(result.data);
             }
-        } catch (error) {
-            content.innerHTML = '<div style="text-align: center; padding: 40px; color: #e74c3c;">Error: ' + error.message + '</div>';
-        }
+        } catch (e) { console.error('Error:', e); }
     }
 
-    function displayDashboard(data) {
-        const content = document.getElementById('dashboardContent');
-        
-        let totalDaily = 0;
-        let totalPakan = 0;
-        let totalMati = 0;
-        let totalAbw = 0;
-        let abwCount = 0;
-        
+    // STATS
+    function displayStats(data) {
+        let totalDaily = 0, totalPakan = 0, totalMati = 0, totalAbw = 0, abwCount = 0;
         data.forEach(item => {
             if (item.sheet === 'Daily') {
                 totalDaily++;
                 const abw = (parseFloat(item.abw_sekat1) + parseFloat(item.abw_sekat2) + parseFloat(item.abw_sekat3) + parseFloat(item.abw_sekat4)) / 4;
-                if (abw > 0) {
-                    totalAbw += abw;
-                    abwCount++;
-                }
+                if (abw > 0) { totalAbw += abw; abwCount++; }
                 totalMati += parseInt(item.jumlah_mati) || 0;
-            } else if (item.sheet === 'Pakan') {
-                totalPakan++;
-            }
+            } else if (item.sheet === 'Pakan') totalPakan++;
         });
-        
         document.getElementById('totalDaily').textContent = totalDaily;
         document.getElementById('totalPakan').textContent = totalPakan;
         document.getElementById('totalMati').textContent = totalMati;
         document.getElementById('avgAbw').textContent = abwCount > 0 ? Math.round(totalAbw / abwCount) + 'g' : '0g';
+    }
+
+    // MASTER REPORT
+    function displayMasterReport(data, filterTanggal) {
+        const content = document.getElementById('masterReportContent');
+        const dailyData = data.filter(i => i.sheet === 'Daily');
         
+        if (dailyData.length === 0) {
+            content.innerHTML = '<div style="text-align:center;padding:40px;color:#7f8c8d;">Belum ada data harian.</div>';
+            return;
+        }
+        
+        // Filter by tanggal jika ada
+        let items = dailyData;
+        if (filterTanggal) {
+            items = dailyData.filter(i => i.tanggal === filterTanggal);
+        }
+        
+        let html = '';
+        
+        items.forEach(item => {
+            const dateObj = new Date(item.tanggal);
+            const formattedDate = dateObj.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
+            
+            // Kumpulkan data pakan untuk tanggal ini
+            const pakanItems = data.filter(i => i.sheet === 'Pakan' && i.tanggal === item.tanggal && i.id_periode === item.id_periode);
+            
+            // Kumpulkan data kematian
+            const fotoMati = parseFotoUrls(item.foto_kematian);
+            
+            html += `<div class="master-report">`;
+            html += `<div class="title">MASTER LAPORAN HARIAN & REKAP 24 JAM</div>`;
+            html += `<div class="farm-name">Nadz Farm's</div>`;
+            html += `<div class="date">Tanggal: ${formattedDate}</div>`;
+            html += `<div class="divider"></div>`;
+            
+            // 1. RINGKASAN OPERASIONAL
+            html += `<div class="section-title">1. RINGKASAN OPERASIONAL HARIAN</div>`;
+            html += `<div class="item">Usia Ayam : ${item.umur_hari} hari</div>`;
+            html += `<div class="item">Pakan Atas : ${item.pakan_atas} karung</div>`;
+            html += `<div class="item">Pakan Bawah : ${item.pakan_bawah} karung</div>`;
+            html += `<div class="item">Timbangan ABW :</div>`;
+            
+            // Sekat 1-4 dengan foto
+            const sekats = [
+                { nama: 'Sekat 1', abw: item.abw_sekat1, foto: item.foto_sekat1 },
+                { nama: 'Sekat 2', abw: item.abw_sekat2, foto: item.foto_sekat2 },
+                { nama: 'Sekat 3', abw: item.abw_sekat3, foto: item.foto_sekat3 },
+                { nama: 'Sekat 4', abw: item.abw_sekat4, foto: item.foto_sekat4 }
+            ];
+            
+            sekats.forEach(s => {
+                const fotoLinks = createFotoLinks(s.foto, 'Foto');
+                html += `<div class="item" style="margin-left:20px;">- ${s.nama} : ${s.abw}g ${fotoLinks ? '— ' + fotoLinks : ''}</div>`;
+            });
+            
+            html += `<div class="divider"></div>`;
+            
+            // 2. PEMASUKAN PAKAN
+            html += `<div class="section-title">2. PEMASUKAN PAKAN</div>`;
+            if (pakanItems.length > 0) {
+                pakanItems.forEach(p => {
+                    html += `<div class="item">• ${p.sumber_pakan} : ${p.jumlah_zak} Zak (${p.jumlah_kg} Kg)</div>`;
+                    const fotoLinks = createFotoLinks(p.dokumentasi, 'Bukti');
+                    if (fotoLinks) html += `<div class="item" style="margin-left:20px;">Dokumentasi : ${fotoLinks}</div>`;
+                });
+            } else {
+                html += `<div class="item">• Tidak ada pakan masuk</div>`;
+            }
+            
+            html += `<div class="divider"></div>`;
+            
+            // 3. KEMATIAN 24 JAM
+            html += `<div class="section-title">3. KEMATIAN 24 JAM</div>`;
+            if (item.jam) {
+                const jamList = item.jam.split(';');
+                jamList.forEach(j => {
+                    html += `<div class="item">• ${j} ekor</div>`;
+                });
+            } else {
+                html += `<div class="item">• Nihil</div>`;
+            }
+            
+            html += `<div class="total">Total Kematian 24 Jam : ${item.jumlah_mati} ekor</div>`;
+            
+            // Rekap eviden
+            if (fotoMati.length > 0) {
+                html += `<div class="item">• Rekap Seluruh Eviden : ${fotoMati.map((u, i) => `Eviden ${i+1} (<a href="${u}" target="_blank">${u}</a>)`).join(' | ')}</div>`;
+            }
+            
+            html += `</div>`;
+        });
+        
+        content.innerHTML = html;
+    }
+
+    // TABLE DATA
+    function displayTableData(data) {
+        const content = document.getElementById('dashboardContent');
         let html = '';
         
         const dailyData = data.filter(item => item.sheet === 'Daily');
         if (dailyData.length > 0) {
-            html += '<div class="card"><h2>Laporan Harian</h2><div style="overflow-x: auto;"><table>';
-            html += '<thead><tr><th>Tanggal</th><th>Periode</th><th>Umur</th><th>Pakan Atas</th><th>Pakan Bawah</th><th>ABW 1</th><th>ABW 2</th><th>ABW 3</th><th>ABW 4</th><th>Kematian</th></tr></thead>';
-            html += '<tbody>';
+            html += '<div class="card"><h2>Laporan Harian</h2><div style="overflow-x:auto;"><table>';
+            html += '<thead><tr><th>Tanggal</th><th>Periode</th><th>Umur</th><th>ABW 1</th><th>Foto 1</th><th>ABW 2</th><th>Foto 2</th><th>ABW 3</th><th>Foto 3</th><th>ABW 4</th><th>Foto 4</th><th>Kematian</th></tr></thead><tbody>';
             dailyData.forEach(item => {
-                html += '<tr>';
-                html += '<td>' + item.tanggal + '</td>';
-                html += '<td>' + item.id_periode + '</td>';
-                html += '<td>' + item.umur_hari + ' hari</td>';
-                html += '<td>' + item.pakan_atas + '</td>';
-                html += '<td>' + item.pakan_bawah + '</td>';
-                html += '<td>' + item.abw_sekat1 + 'g</td>';
-                html += '<td>' + item.abw_sekat2 + 'g</td>';
-                html += '<td>' + item.abw_sekat3 + 'g</td>';
-                html += '<td>' + item.abw_sekat4 + 'g</td>';
-                html += '<td style="color: #e74c3c; font-weight: 600;">' + item.jumlah_mati + ' ekor</td>';
-                html += '</tr>';
+                html += `<tr><td>${item.tanggal}</td><td>${item.id_periode}</td><td>${item.umur_hari} hari</td>`;
+                html += `<td>${item.abw_sekat1}g</td><td>${createFotoThumbnails(item.foto_sekat1)}</td>`;
+                html += `<td>${item.abw_sekat2}g</td><td>${createFotoThumbnails(item.foto_sekat2)}</td>`;
+                html += `<td>${item.abw_sekat3}g</td><td>${createFotoThumbnails(item.foto_sekat3)}</td>`;
+                html += `<td>${item.abw_sekat4}g</td><td>${createFotoThumbnails(item.foto_sekat4)}</td>`;
+                html += `<td style="color:#e74c3c;font-weight:600;">${item.jumlah_mati} ekor</td></tr>`;
             });
             html += '</tbody></table></div></div>';
         }
         
         const pakanData = data.filter(item => item.sheet === 'Pakan');
         if (pakanData.length > 0) {
-            html += '<div class="card"><h2>Riwayat Pakan Masuk</h2><div style="overflow-x: auto;"><table>';
-            html += '<thead><tr><th>Tanggal</th><th>Periode</th><th>Sumber</th><th>No. PO</th><th>Zak</th><th>Kg</th><th>Kendaraan</th></tr></thead>';
-            html += '<tbody>';
+            html += '<div class="card"><h2>Riwayat Pakan</h2><div style="overflow-x:auto;"><table>';
+            html += '<thead><tr><th>Tanggal</th><th>Periode</th><th>Sumber</th><th>Zak</th><th>Kg</th><th>Dokumentasi</th></tr></thead><tbody>';
             pakanData.forEach(item => {
-                html += '<tr>';
-                html += '<td>' + item.tanggal + '</td>';
-                html += '<td>' + item.id_periode + '</td>';
-                html += '<td>' + item.sumber_pakan + '</td>';
-                html += '<td>' + item.no_po + '</td>';
-                html += '<td>' + item.jumlah_zak + '</td>';
-                html += '<td>' + item.jumlah_kg + '</td>';
-                html += '<td>' + item.kendaraan + '</td>';
-                html += '</tr>';
+                html += `<tr><td>${item.tanggal}</td><td>${item.id_periode}</td><td>${item.sumber_pakan}</td><td>${item.jumlah_zak}</td><td>${item.jumlah_kg}</td><td>${createFotoThumbnails(item.dokumentasi)}</td></tr>`;
             });
             html += '</tbody></table></div></div>';
         }
         
-        if (html === '') {
-            html = '<div style="text-align: center; padding: 40px; color: #7f8c8d;">Belum ada data untuk periode ini.</div>';
-        }
-        
-        content.innerHTML = html;
+        content.innerHTML = html || '<div style="text-align:center;padding:40px;color:#7f8c8d;">Belum ada data.</div>';
     }
 
-    // ==========================================
-    // INITIAL LOAD
-    // ==========================================
-    document.addEventListener('DOMContentLoaded', function() {
-        checkSession();
-    });
-
-    console.log('Dashboard dengan login loaded!');
+    // INIT
+    document.addEventListener('DOMContentLoaded', checkSession);
+    setInterval(() => { if (document.getElementById('dashboardPage').style.display === 'block') loadDashboard(); }, 300000);
 </script>
-
 </body>
 </html>

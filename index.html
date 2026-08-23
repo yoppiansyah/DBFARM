@@ -7,10 +7,127 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif; background: #f0f2f5; min-height: 100vh; padding: 20px; color: #1a1a2e; }
-        .container { max-width: 1200px; margin: 0 auto; }
-        .header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: white; padding: 20px 28px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; }
+        
+        /* LOGIN PAGE */
+        .login-container {
+            max-width: 400px;
+            margin: 50px auto;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .login-header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            padding: 35px 30px;
+            text-align: center;
+        }
+        .login-header .logo {
+            width: 70px;
+            height: 70px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 28px;
+            font-weight: 700;
+            color: #1a1a2e;
+        }
+        .login-header h1 { font-size: 22px; font-weight: 700; margin-bottom: 5px; }
+        .login-header p { font-size: 13px; opacity: 0.7; }
+        .login-body { padding: 30px; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; font-size: 13px; color: #2c3e50; }
+        .input-group { position: relative; }
+        .input-group .icon { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); font-size: 16px; color: #9aa5b1; }
+        .input-group input {
+            width: 100%;
+            padding: 12px 15px 12px 45px;
+            border: 2px solid #e8ecf1;
+            border-radius: 10px;
+            font-size: 15px;
+            transition: all 0.3s;
+            background: #fafbfc;
+        }
+        .input-group input:focus { outline: none; border-color: #1a1a2e; background: white; box-shadow: 0 0 0 3px rgba(26, 26, 46, 0.05); }
+        .password-toggle { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 13px; color: #9aa5b1; user-select: none; }
+        .password-toggle:hover { color: #1a1a2e; }
+        .remember-forgot { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .checkbox-group { display: flex; align-items: center; gap: 8px; cursor: pointer; }
+        .checkbox-group input[type="checkbox"] { width: 16px; height: 16px; cursor: pointer; }
+        .checkbox-group label { font-size: 13px; color: #5d6d7e; cursor: pointer; margin-bottom: 0; }
+        .btn-login {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            letter-spacing: 0.5px;
+        }
+        .btn-login:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(26, 26, 46, 0.2); }
+        .btn-login:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+        .alert {
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+            font-size: 13px;
+            font-weight: 500;
+            animation: slideDown 0.3s ease;
+        }
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        .alert.show { display: flex; align-items: center; gap: 10px; }
+        .alert.error { background: #fdf2f2; color: #a93226; border-left: 4px solid #e74c3c; }
+        .alert.success { background: #eafaf1; color: #1a7a42; border-left: 4px solid #2ecc71; }
+        .loading-spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin: 0 auto;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        
+        /* DASHBOARD */
+        .dashboard-container { display: none; max-width: 1200px; margin: 0 auto; }
+        .header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            padding: 20px 28px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
         .header .brand h1 { font-size: 22px; font-weight: 700; }
         .header .brand .sub { font-size: 11px; opacity: 0.6; text-transform: uppercase; letter-spacing: 1px; }
+        .header .user-info { display: flex; align-items: center; gap: 15px; }
+        .header .user-info .username { font-size: 14px; font-weight: 600; }
+        .btn-logout {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 13px;
+        }
+        .btn-logout:hover { background: #c0392b; }
         .btn-refresh { background: #2ecc71; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-weight: 600; }
         .btn-refresh:hover { background: #27ae60; }
         .filter-box { background: white; padding: 20px; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
@@ -30,60 +147,243 @@
         tr:hover { background: #f8f9fc; }
         .loading { text-align: center; padding: 40px; }
         .spinner { width: 40px; height: 40px; border: 4px solid #e8ecf1; border-top-color: #1a1a2e; border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 10px; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         @media (max-width: 768px) { .header { flex-direction: column; align-items: stretch; } }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <div class="header">
-        <div class="brand">
+    <!-- LOGIN PAGE -->
+    <div class="login-container" id="loginPage">
+        <div class="login-header">
+            <div class="logo">NF</div>
             <h1>Nadz Farm's</h1>
-            <div class="sub">Dashboard Monitoring</div>
+            <p>Sistem Manajemen Peternakan</p>
         </div>
-        <button class="btn-refresh" onclick="loadDashboard()">🔄 Refresh Data</button>
+        
+        <div class="login-body">
+            <div id="alert" class="alert"></div>
+            
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <div class="input-group">
+                        <span class="icon">&#128100;</span>
+                        <input type="text" id="username" placeholder="Masukkan username" required autocomplete="username">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="input-group">
+                        <span class="icon">&#128274;</span>
+                        <input type="password" id="password" placeholder="Masukkan password" required autocomplete="current-password">
+                        <span class="password-toggle" onclick="togglePassword()">Show</span>
+                    </div>
+                </div>
+                
+                <div class="remember-forgot">
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="rememberMe" checked>
+                        <label for="rememberMe">Ingat saya</label>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn-login" id="loginBtn">
+                    <span id="btnText">Masuk</span>
+                    <div class="loading-spinner" id="loadingSpinner"></div>
+                </button>
+            </form>
+        </div>
     </div>
 
-    <div class="filter-box">
-        <label style="font-weight: 600; margin-right: 10px;">Filter Periode:</label>
-        <select id="filterPeriode" onchange="loadDashboard()">
-            <option value="">Semua Periode</option>
-        </select>
-    </div>
+    <!-- DASHBOARD -->
+    <div class="dashboard-container" id="dashboardPage">
+        <div class="header">
+            <div class="brand">
+                <h1>Nadz Farm's</h1>
+                <div class="sub">Dashboard Monitoring</div>
+            </div>
+            <div class="user-info">
+                <span class="username" id="displayUsername"></span>
+                <button class="btn-logout" onclick="logout()">Keluar</button>
+            </div>
+        </div>
 
-    <div class="stats-grid">
-        <div class="stat-card">
-            <div class="label">Total Data Harian</div>
-            <div class="value blue" id="totalDaily">0</div>
-        </div>
-        <div class="stat-card">
-            <div class="label">Total Pakan Masuk</div>
-            <div class="value green" id="totalPakan">0</div>
-        </div>
-        <div class="stat-card">
-            <div class="label">Total Kematian</div>
-            <div class="value red" id="totalMati">0</div>
-        </div>
-        <div class="stat-card">
-            <div class="label">Rata-rata ABW</div>
-            <div class="value blue" id="avgAbw">0g</div>
-        </div>
-    </div>
+        <button class="btn-refresh" onclick="loadDashboard()" style="margin-bottom: 20px;">Refresh Data</button>
 
-    <div id="dashboardContent">
-        <div class="loading">
-            <div class="spinner"></div>
-            <div>Memuat data...</div>
+        <div class="filter-box">
+            <label style="font-weight: 600; margin-right: 10px;">Filter Periode:</label>
+            <select id="filterPeriode" onchange="loadDashboard()">
+                <option value="">Semua Periode</option>
+            </select>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="label">Total Data Harian</div>
+                <div class="value blue" id="totalDaily">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="label">Total Pakan Masuk</div>
+                <div class="value green" id="totalPakan">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="label">Total Kematian</div>
+                <div class="value red" id="totalMati">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="label">Rata-rata ABW</div>
+                <div class="value blue" id="avgAbw">0g</div>
+            </div>
+        </div>
+
+        <div id="dashboardContent">
+            <div class="loading">
+                <div class="spinner"></div>
+                <div>Memuat data...</div>
+            </div>
         </div>
     </div>
-</div>
 
 <script>
-    // KONFIGURASI - GANTI DENGAN URL APPS SCRIPT ANDA
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxQDTBNX4lh7UH1ArW7Ys1nA9aNk3SQKu4yI80Al0apM0gn4JY4F9D86CuuyaSPJ6gV/exec';
+    // ==========================================
+    // KONFIGURASI
+    // ==========================================
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwYjJ0RjPjZgoY7Q6MfoGF3C1qvH4BUTi7DArB8D3dHDqqFjB0xUbytIPdNG27AZ-4o/exec';
+    
+    // USER LOGIN
+    const VALID_USERNAME = 'admin';
+    const VALID_PASSWORD = 'ayamberkah12';
 
-    // Load periode untuk filter
+    // ==========================================
+    // FUNGSI LOGIN
+    // ==========================================
+    function togglePassword() {
+        const passwordInput = document.getElementById('password');
+        const toggleBtn = document.querySelector('.password-toggle');
+        
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            toggleBtn.textContent = 'Hide';
+        } else {
+            passwordInput.type = 'password';
+            toggleBtn.textContent = 'Show';
+        }
+    }
+
+    function showAlert(message, type) {
+        const alert = document.getElementById('alert');
+        alert.className = 'alert show ' + type;
+        alert.innerHTML = message;
+        clearTimeout(alert._timer);
+        alert._timer = setTimeout(() => alert.classList.remove('show'), 5000);
+    }
+
+    function showLoading(isLoading) {
+        const btnText = document.getElementById('btnText');
+        const spinner = document.getElementById('loadingSpinner');
+        const loginBtn = document.getElementById('loginBtn');
+        
+        if (isLoading) {
+            btnText.style.display = 'none';
+            spinner.style.display = 'block';
+            loginBtn.disabled = true;
+        } else {
+            btnText.style.display = 'block';
+            spinner.style.display = 'none';
+            loginBtn.disabled = false;
+        }
+    }
+
+    function handleLogin(event) {
+        event.preventDefault();
+        
+        const username = document.getElementById('username').value.trim();
+        const password = document.getElementById('password').value;
+        const rememberMe = document.getElementById('rememberMe').checked;
+        
+        if (!username || !password) {
+            showAlert('Username dan password wajib diisi!', 'error');
+            return;
+        }
+        
+        showLoading(true);
+        
+        setTimeout(() => {
+            if (username === VALID_USERNAME && password === VALID_PASSWORD) {
+                showLoading(false);
+                showAlert('Login berhasil!', 'success');
+                
+                // Simpan session
+                const sessionData = {
+                    username: username,
+                    login_time: new Date().toISOString()
+                };
+                
+                if (rememberMe) {
+                    localStorage.setItem('nadz_farm_session', JSON.stringify(sessionData));
+                } else {
+                    sessionStorage.setItem('nadz_farm_session', JSON.stringify(sessionData));
+                }
+                
+                // Tampilkan dashboard
+                setTimeout(() => {
+                    showDashboard(username);
+                }, 500);
+                
+            } else {
+                showLoading(false);
+                showAlert('Username atau password salah!', 'error');
+                document.getElementById('password').value = '';
+                document.getElementById('password').focus();
+            }
+        }, 800);
+    }
+
+    function showDashboard(username) {
+        document.getElementById('loginPage').style.display = 'none';
+        document.getElementById('dashboardPage').style.display = 'block';
+        document.getElementById('displayUsername').textContent = username;
+        
+        // Load data dashboard
+        loadFilterPeriode();
+        loadDashboard();
+    }
+
+    function logout() {
+        localStorage.removeItem('nadz_farm_session');
+        sessionStorage.removeItem('nadz_farm_session');
+        
+        document.getElementById('dashboardPage').style.display = 'none';
+        document.getElementById('loginPage').style.display = 'block';
+        
+        document.getElementById('username').value = '';
+        document.getElementById('password').value = '';
+        document.getElementById('username').focus();
+    }
+
+    function checkSession() {
+        const session = localStorage.getItem('nadz_farm_session') || 
+                       sessionStorage.getItem('nadz_farm_session');
+        
+        if (session) {
+            const data = JSON.parse(session);
+            const loginTime = new Date(data.login_time);
+            const now = new Date();
+            const diffHours = (now - loginTime) / (1000 * 60 * 60);
+            
+            if (diffHours < 168) { // 7 hari (168 jam)
+                showDashboard(data.username);
+            } else {
+                localStorage.removeItem('nadz_farm_session');
+                sessionStorage.removeItem('nadz_farm_session');
+            }
+        }
+    }
+
+    // ==========================================
+    // FUNGSI DASHBOARD
+    // ==========================================
     async function loadFilterPeriode() {
         try {
             const response = await fetch(SCRIPT_URL + '?action=getPeriode');
@@ -157,10 +457,9 @@
         
         let html = '';
         
-        // Tabel Daily
         const dailyData = data.filter(item => item.sheet === 'Daily');
         if (dailyData.length > 0) {
-            html += '<div class="card"><h2>📊 Laporan Harian</h2><div style="overflow-x: auto;"><table>';
+            html += '<div class="card"><h2>Laporan Harian</h2><div style="overflow-x: auto;"><table>';
             html += '<thead><tr><th>Tanggal</th><th>Periode</th><th>Umur</th><th>Pakan Atas</th><th>Pakan Bawah</th><th>ABW 1</th><th>ABW 2</th><th>ABW 3</th><th>ABW 4</th><th>Kematian</th></tr></thead>';
             html += '<tbody>';
             dailyData.forEach(item => {
@@ -180,10 +479,9 @@
             html += '</tbody></table></div></div>';
         }
         
-        // Tabel Pakan
         const pakanData = data.filter(item => item.sheet === 'Pakan');
         if (pakanData.length > 0) {
-            html += '<div class="card"><h2>📦 Riwayat Pakan Masuk</h2><div style="overflow-x: auto;"><table>';
+            html += '<div class="card"><h2>Riwayat Pakan Masuk</h2><div style="overflow-x: auto;"><table>';
             html += '<thead><tr><th>Tanggal</th><th>Periode</th><th>Sumber</th><th>No. PO</th><th>Zak</th><th>Kg</th><th>Kendaraan</th></tr></thead>';
             html += '<tbody>';
             pakanData.forEach(item => {
@@ -207,12 +505,14 @@
         content.innerHTML = html;
     }
 
-    // Load dashboard saat halaman dimuat
-    loadFilterPeriode();
-    loadDashboard();
-    
-    // Auto refresh setiap 5 menit
-    setInterval(loadDashboard, 300000);
+    // ==========================================
+    // INITIAL LOAD
+    // ==========================================
+    document.addEventListener('DOMContentLoaded', function() {
+        checkSession();
+    });
+
+    console.log('Dashboard dengan login loaded!');
 </script>
 
 </body>

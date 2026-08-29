@@ -35,6 +35,9 @@
                 --text-main: #f1f5f9;
                 --text-muted: #94a3b8;
                 --border: #334155;
+                --shadow-sm: 0 4px 15px rgba(0,0,0,0.2);
+                --shadow-md: 0 10px 30px rgba(0,0,0,0.3);
+                --shadow-lg: 0 15px 30px rgba(0,0,0,0.4);
             }
             body { color: var(--text-main); }
             .input-group input, .filter-search-box select, .filter-search-box input[type="date"] { 
@@ -79,9 +82,36 @@
             color: white; 
             padding: 40px 20px; 
             text-align: center; 
+            position: relative; 
+            overflow: hidden; 
         }
-        .login-header h1 { font-size: 26px; font-weight: 800; margin-bottom: 5px; }
-        .login-header p { font-size: 12px; opacity: 0.9; text-transform: uppercase; letter-spacing: 2px; }
+        .login-header::before { 
+            content: ''; 
+            position: absolute; 
+            top: -50%; 
+            left: -50%; 
+            width: 200%; 
+            height: 200%; 
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%); 
+            pointer-events: none; 
+        }
+        .login-header h1 { 
+            font-size: 26px; 
+            font-weight: 800; 
+            margin-bottom: 5px; 
+            letter-spacing: -0.5px; 
+            position: relative; 
+            z-index: 1; 
+        }
+        .login-header p { 
+            font-size: 12px; 
+            opacity: 0.9; 
+            text-transform: uppercase; 
+            letter-spacing: 2px; 
+            font-weight: 600; 
+            position: relative; 
+            z-index: 1; 
+        }
         
         .login-body { padding: 30px 25px; }
         .form-group { margin-bottom: 20px; }
@@ -103,6 +133,9 @@
             transform: translateY(-50%); 
             font-size: 18px; 
             color: var(--secondary); 
+            z-index: 2; 
+            display: flex; 
+            align-items: center; 
         }
         .input-group input { 
             width: 100%; 
@@ -112,12 +145,18 @@
             font-size: 15px; 
             background: #faf5ff; 
             color: var(--text-main); 
+            transition: all 0.2s; 
             font-family: inherit; 
         }
         .input-group input:focus { 
             outline: none; 
             border-color: var(--primary); 
             background: var(--card-bg); 
+            box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.1); 
+        }
+        .input-group input::placeholder { 
+            color: var(--text-muted); 
+            opacity: 0.6; 
         }
         
         .password-toggle { 
@@ -129,7 +168,11 @@
             font-size: 11px; 
             color: var(--primary); 
             font-weight: 700; 
+            user-select: none; 
+            padding: 5px; 
+            letter-spacing: 0.5px; 
         }
+        .password-toggle:hover { opacity: 0.7; }
         
         .btn-login { 
             width: 100%; 
@@ -141,8 +184,19 @@
             font-size: 16px; 
             font-weight: 700; 
             cursor: pointer; 
+            transition: all 0.2s; 
+            box-shadow: 0 10px 25px rgba(109, 40, 217, 0.3); 
             margin-top: 10px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            gap: 10px; 
         }
+        .btn-login:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 15px 35px rgba(109, 40, 217, 0.4); 
+        }
+        .btn-login:active { transform: scale(0.98); }
         
         .alert { 
             padding: 12px; 
@@ -150,6 +204,7 @@
             margin-bottom: 20px; 
             display: none; 
             font-size: 13px; 
+            font-weight: 500; 
             text-align: center; 
         }
         .alert.show { display: block; animation: shake 0.4s; }
@@ -158,6 +213,14 @@
             0%, 100% { transform: translateX(0); } 
             25% { transform: translateX(-5px); } 
             75% { transform: translateX(5px); } 
+        }
+
+        .login-footer { 
+            text-align: center; 
+            font-size: 11px; 
+            color: var(--text-muted); 
+            margin-top: 20px; 
+            opacity: 0.7; 
         }
 
         .dashboard-container { 
@@ -179,6 +242,19 @@
             gap: 15px; 
             margin-bottom: 20px; 
             box-shadow: var(--shadow-lg); 
+            position: relative; 
+            overflow: hidden; 
+        }
+        .header::after { 
+            content: ''; 
+            position: absolute; 
+            right: -20px; 
+            bottom: -20px; 
+            width: 150px; 
+            height: 150px; 
+            background: rgba(255,255,255,0.1); 
+            border-radius: 50%; 
+            pointer-events: none; 
         }
         
         .header-content { 
@@ -186,11 +262,26 @@
             justify-content: space-between; 
             align-items: center; 
             width: 100%; 
+            z-index: 1; 
             gap: 15px; 
             flex-wrap: wrap; 
         }
-        .brand h1 { font-size: 20px; font-weight: 800; }
-        .brand .sub { font-size: 11px; opacity: 0.9; text-transform: uppercase; letter-spacing: 1px; }
+        .brand h1 { 
+            font-size: 20px; 
+            font-weight: 800; 
+            letter-spacing: -0.5px; 
+            display: flex; 
+            align-items: center; 
+            gap: 10px; 
+        }
+        .brand .sub { 
+            font-size: 11px; 
+            opacity: 0.9; 
+            text-transform: uppercase; 
+            letter-spacing: 1px; 
+            font-weight: 600; 
+            margin-top: 2px; 
+        }
         
         .user-actions { 
             display: flex; 
@@ -199,6 +290,7 @@
             background: rgba(255,255,255,0.15); 
             padding: 6px 12px 6px 6px; 
             border-radius: 50px; 
+            backdrop-filter: blur(5px); 
         }
         .avatar { 
             width: 32px; 
@@ -209,8 +301,15 @@
             display: flex; 
             align-items: center; 
             justify-content: center; 
+            font-size: 16px; 
+            flex-shrink: 0; 
         }
-        .username-text { font-size: 13px; font-weight: 600; display: none; }
+        .username-text { 
+            font-size: 13px; 
+            font-weight: 600; 
+            margin-right: 8px; 
+            display: none; 
+        }
         @media (min-width: 480px) { .username-text { display: inline; } }
         .btn-logout { 
             background: rgba(255,255,255,0.2); 
@@ -219,8 +318,14 @@
             padding: 6px 14px; 
             border-radius: 20px; 
             cursor: pointer; 
+            font-weight: 600; 
             font-size: 12px; 
+            transition: 0.2s; 
+            display: flex; 
+            align-items: center; 
+            gap: 6px; 
         }
+        .btn-logout:hover { background: rgba(255,255,255,0.3); }
 
         .status-bar { 
             background: var(--card-bg); 
@@ -236,12 +341,40 @@
             gap: 10px; 
             font-size: 12px; 
         }
-        .status-left { display: flex; align-items: center; gap: 15px; flex-wrap: wrap; }
-        .status-item { display: flex; align-items: center; gap: 6px; font-weight: 600; color: var(--text-muted); }
-        .status-dot { width: 8px; height: 8px; border-radius: 50%; background: #cbd5e1; }
-        .status-dot.online { background: var(--success); }
-        .status-dot.offline { background: var(--danger); }
-        .status-dot.checking { background: var(--warning); animation: pulse 1s infinite; }
+        .status-left { 
+            display: flex; 
+            align-items: center; 
+            gap: 15px; 
+            flex-wrap: wrap; 
+        }
+        .status-item { 
+            display: flex; 
+            align-items: center; 
+            gap: 6px; 
+            font-weight: 600; 
+            color: var(--text-muted); 
+        }
+        .status-item i { font-size: 16px; }
+        .status-dot { 
+            width: 8px; 
+            height: 8px; 
+            border-radius: 50%; 
+            background: #cbd5e1; 
+            transition: 0.3s; 
+            flex-shrink: 0; 
+        }
+        .status-dot.online { 
+            background: var(--success); 
+            box-shadow: 0 0 0 3px rgba(16,185,129,0.2); 
+        }
+        .status-dot.offline { 
+            background: var(--danger); 
+            box-shadow: 0 0 0 3px rgba(239,68,68,0.2); 
+        }
+        .status-dot.checking { 
+            background: var(--warning); 
+            animation: pulse 1s infinite; 
+        }
         @keyframes pulse { 50% { opacity: 0.5; } }
         
         .btn-support { 
@@ -252,7 +385,17 @@
             border-radius: 20px; 
             font-weight: 700; 
             font-size: 12px; 
+            display: inline-flex; 
+            align-items: center; 
+            gap: 6px; 
+            transition: 0.2s; 
+            box-shadow: 0 4px 10px rgba(37, 211, 102, 0.2); 
         }
+        .btn-support:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 6px 15px rgba(37, 211, 102, 0.3); 
+        }
+        .btn-support i { font-size: 16px; }
 
         .controls-area { 
             display: flex; 
@@ -271,7 +414,17 @@
             cursor: pointer; 
             font-weight: 700; 
             font-size: 13px; 
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+            transition: 0.2s; 
             box-shadow: var(--shadow-sm); 
+            white-space: nowrap; 
+            flex-shrink: 0; 
+        }
+        .btn-refresh:hover { 
+            background: #f8fafc; 
+            border-color: var(--primary); 
         }
         .btn-refresh.spinning i { animation: spin 1s linear infinite; }
         @keyframes spin { 100% { transform: rotate(360deg); } }
@@ -307,9 +460,34 @@
             font-size: 13px; 
             color: var(--text-main); 
             width: 100%; 
+            font-family: inherit; 
             min-width: 80px; 
         }
-        .search-icon { color: var(--text-muted); font-size: 18px; }
+        .search-input::placeholder { 
+            color: var(--text-muted); 
+            opacity: 0.6; 
+        }
+        .search-icon { 
+            color: var(--text-muted); 
+            font-size: 18px; 
+            display: flex; 
+            align-items: center; 
+            flex-shrink: 0; 
+        }
+
+        @media (max-width: 768px) {
+            .filter-search-box { flex-direction: column; align-items: stretch; }
+            .filter-search-box select, .filter-search-box input { 
+                border-right: none !important; 
+                border-bottom: 1px solid var(--border); 
+                padding: 8px 0; 
+                width: 100%; 
+            }
+            .filter-search-box select:last-child, .filter-search-box input:last-child { border-bottom: none; }
+            .btn-text { display: none; }
+            .btn-refresh { justify-content: center; padding: 12px; }
+            .search-icon { display: none; }
+        }
 
         .tabs { 
             display: flex; 
@@ -319,7 +497,9 @@
             padding: 5px; 
             border-radius: var(--radius-md); 
             overflow-x: auto; 
+            scrollbar-width: none; 
         }
+        .tabs::-webkit-scrollbar { display: none; }
         .tab-btn { 
             padding: 10px 20px; 
             border: none; 
@@ -330,7 +510,14 @@
             cursor: pointer; 
             border-radius: var(--radius-sm); 
             white-space: nowrap; 
+            transition: all 0.2s; 
+            display: flex; 
+            align-items: center; 
+            gap: 6px; 
+            flex-shrink: 0; 
         }
+        .tab-btn i { font-size: 16px; }
+        .tab-btn:hover { background: rgba(124, 58, 237, 0.05); }
         .tab-btn.active { 
             background: var(--card-bg); 
             color: var(--primary); 
@@ -352,7 +539,10 @@
             box-shadow: var(--shadow-sm); 
             transition: 0.2s; 
         }
-        .stat-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+        .stat-card:hover { 
+            transform: translateY(-2px); 
+            box-shadow: var(--shadow-md); 
+        }
         .stat-label { 
             font-size: 11px; 
             color: var(--text-muted); 
@@ -365,8 +555,17 @@
             gap: 6px; 
         }
         .stat-label i { font-size: 14px; }
-        .stat-value { font-size: 22px; font-weight: 800; line-height: 1.2; }
-        .stat-sub { font-size: 11px; color: var(--text-muted); font-weight: 600; margin-top: 2px; }
+        .stat-value { 
+            font-size: 22px; 
+            font-weight: 800; 
+            line-height: 1.2; 
+        }
+        .stat-sub { 
+            font-size: 11px; 
+            color: var(--text-muted); 
+            font-weight: 600; 
+            margin-top: 2px; 
+        }
 
         .tab-content { display: none; animation: fadeIn 0.3s ease; }
         .tab-content.active { display: block; }
@@ -388,7 +587,14 @@
             flex-wrap: wrap; 
             gap: 10px; 
         }
-        .card h2 { font-size: 16px; font-weight: 700; }
+        .card h2 { 
+            font-size: 16px; 
+            color: var(--text-main); 
+            font-weight: 700; 
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+        }
         .card-badge { 
             font-size: 11px; 
             background: rgba(124, 58, 237, 0.1); 
@@ -404,7 +610,12 @@
             border-radius: var(--radius-sm); 
             border: 1px solid var(--border); 
         }
-        table { width: 100%; border-collapse: collapse; min-width: 900px; font-size: 13px; }
+        table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            min-width: 900px; 
+            font-size: 13px; 
+        }
         th { 
             background: #f8fafc; 
             font-weight: 700; 
@@ -420,7 +631,9 @@
         td { 
             padding: 12px 16px; 
             border-bottom: 1px solid var(--border); 
+            color: var(--text-main); 
             white-space: nowrap; 
+            vertical-align: middle; 
         }
         tr:last-child td { border-bottom: none; }
         tr:hover td { background: rgba(124, 58, 237, 0.02); }
@@ -431,10 +644,20 @@
             border-radius: 6px; 
             font-size: 11px; 
             font-weight: 700; 
+            display: inline-block; 
         }
 
-        .foto-slider-container { display: flex; align-items: center; gap: 6px; }
-        .slider-track { display: flex; gap: 4px; overflow: hidden; width: 88px; }
+        .foto-slider-container { 
+            display: flex; 
+            align-items: center; 
+            gap: 6px; 
+        }
+        .slider-track { 
+            display: flex; 
+            gap: 4px; 
+            overflow: hidden; 
+            width: 88px; 
+        }
         .slider-item { 
             min-width: 42px; 
             height: 42px; 
@@ -442,23 +665,46 @@
             overflow: hidden; 
             border: 1px solid var(--border); 
             cursor: pointer; 
+            flex-shrink: 0; 
             background: #f1f5f9; 
             display: flex; 
             align-items: center; 
             justify-content: center; 
+            transition: 0.2s; 
         }
-        .slider-item img { width: 100%; height: 100%; object-fit: cover; }
+        .slider-item:hover { 
+            border-color: var(--primary); 
+            transform: scale(1.05); 
+            z-index: 1; 
+        }
+        .slider-item img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+        }
         .slider-btn { 
             background: var(--card-bg); 
             border: 1px solid var(--border); 
             border-radius: 6px; 
             width: 24px; 
             height: 42px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
             cursor: pointer; 
             color: var(--text-muted); 
             font-size: 18px; 
             font-weight: 700; 
+            transition: 0.2s; 
+            flex-shrink: 0; 
+            user-select: none; 
         }
+        .slider-btn:hover { 
+            background: var(--primary); 
+            color: white; 
+            border-color: var(--primary); 
+        }
+        .slider-btn:active { transform: scale(0.95); }
 
         .modal { 
             display: none; 
@@ -471,15 +717,23 @@
             z-index: 2000; 
             justify-content: center; 
             align-items: center; 
+            cursor: zoom-out; 
             padding: 20px; 
+            backdrop-filter: blur(10px); 
+            opacity: 0; 
+            transition: opacity 0.3s; 
         }
-        .modal.active { display: flex; }
+        .modal.active { display: flex; opacity: 1; }
         .modal img { 
             max-width: 100%; 
             max-height: 90vh; 
             border-radius: 12px; 
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5); 
             object-fit: contain; 
+            transform: scale(0.9); 
+            transition: transform 0.3s; 
         }
+        .modal.active img { transform: scale(1); }
         .modal-close { 
             position: absolute; 
             top: 20px; 
@@ -494,9 +748,15 @@
             display: flex; 
             align-items: center; 
             justify-content: center; 
+            transition: 0.2s; 
         }
+        .modal-close:hover { background: rgba(255,255,255,0.2); }
 
-        .loading-state { text-align: center; padding: 40px; color: var(--text-muted); }
+        .loading-state { 
+            text-align: center; 
+            padding: 40px; 
+            color: var(--text-muted); 
+        }
         .spinner { 
             width: 30px; 
             height: 30px; 
@@ -506,13 +766,35 @@
             animation: spin 0.8s linear infinite; 
             margin: 0 auto 15px; 
         }
-        .empty-state { text-align: center; padding: 40px 20px; color: var(--text-muted); }
-        .footer-credit { text-align: center; font-size: 11px; color: var(--text-muted); margin-top: 30px; padding-bottom: 20px; }
+        
+        .empty-state { 
+            text-align: center; 
+            padding: 40px 20px; 
+            color: var(--text-muted); 
+        }
+        .empty-state i { 
+            font-size: 48px; 
+            margin-bottom: 10px; 
+            opacity: 0.3; 
+            display: block; 
+        }
+        .empty-state p { margin-top: 5px; }
+
+        .footer-credit { 
+            text-align: center; 
+            font-size: 11px; 
+            color: var(--text-muted); 
+            margin-top: 30px; 
+            padding-bottom: 20px; 
+            opacity: 0.7; 
+        }
+        .footer-credit strong { color: var(--primary); }
 
         @media (min-width: 480px) {
             .stats-grid { grid-template-columns: repeat(2, 1fr); }
         }
         @media (min-width: 768px) {
+            .header { flex-direction: row; padding: 25px 35px; }
             .stats-grid { grid-template-columns: repeat(3, 1fr); }
             .card { padding: 25px; }
         }
@@ -536,19 +818,20 @@
                 <label>Username</label>
                 <div class="input-group">
                     <span class="icon"><i class="ph ph-user"></i></span>
-                    <input type="text" id="username" placeholder="Masukkan username" required>
+                    <input type="text" id="username" placeholder="Masukkan username" required autocomplete="off">
                 </div>
             </div>
             <div class="form-group">
                 <label>Password</label>
                 <div class="input-group">
                     <span class="icon"><i class="ph ph-lock-key"></i></span>
-                    <input type="password" id="password" placeholder="Masukkan password" required>
+                    <input type="password" id="password" placeholder="Masukkan password" required autocomplete="off">
                     <span class="password-toggle" onclick="togglePassword()">LIHAT</span>
                 </div>
             </div>
             <button type="submit" class="btn-login"><i class="ph ph-sign-in"></i> Masuk Dashboard</button>
         </form>
+        <div class="login-footer">Nadia Farm's - Smart Poultry Manager</div>
     </div>
 </div>
 
@@ -557,7 +840,7 @@
     <div class="header">
         <div class="header-content">
             <div class="brand">
-                <h1>Nadia Nurhaliza Farm's</h1>
+                <h1><i class="ph ph-plant"></i> Nadia Nurhaliza Farm's</h1>
                 <div class="sub">Smart Poultry Manager</div>
             </div>
             <div class="user-actions">
@@ -574,7 +857,7 @@
                 <span class="status-dot checking" id="statusDot"></span>
                 <span id="statusText">Memeriksa...</span>
             </div>
-            <div class="status-item">
+            <div class="status-item" style="border-left: 1px solid var(--border); padding-left: 15px;">
                 <i class="ph ph-calendar"></i>
                 <span id="liveClock">-</span>
             </div>
@@ -587,15 +870,15 @@
     <div class="controls-area">
         <button class="btn-refresh" id="refreshBtn" onclick="loadDashboard()">
             <i class="ph ph-arrows-clockwise"></i>
-            <span>Refresh</span>
+            <span class="btn-text">Refresh</span>
         </button>
         
         <div class="filter-search-box">
-            <select id="filterPeriode" onchange="handlePeriodeChange()">
+            <select id="filterPeriode" onchange="handlePeriodeChange()" style="border-right: 1px solid var(--border); padding-right: 10px;">
                 <option value="">-- Semua Periode --</option>
             </select>
 
-            <select id="filterWaktu" onchange="handleWaktuChange()" style="display: none;">
+            <select id="filterWaktu" onchange="handleWaktuChange()" style="display: none; border-right: 1px solid var(--border); padding-right: 10px;">
                 <option value="semua">Semua Waktu</option>
                 <option value="hari_ini">Hari Ini</option>
                 <option value="bulan_ini">Bulan Ini</option>
@@ -603,25 +886,24 @@
                 <option value="custom">Pilih Tanggal...</option>
             </select>
 
-            <input type="date" id="filterTanggal" style="display: none;" onchange="filterTable()">
+            <input type="date" id="filterTanggal" style="display: none; border: none; outline: none; background: transparent; font-family: inherit; font-size: 13px; color: var(--text-main); border-right: 1px solid var(--border); padding-right: 10px;" onchange="filterTable()">
             
-            <span class="search-icon"><i class="ph ph-magnifying-glass"></i></span>
+            <span class="search-icon" style="margin-left: 5px;"><i class="ph ph-magnifying-glass"></i></span>
             <input type="text" id="globalSearch" class="search-input" placeholder="Cari..." oninput="filterTable()">
         </div>
     </div>
 
     <div class="tabs">
-        <button class="tab-btn active" onclick="switchTab('pakan')">Riwayat Pakan</button>
-        <button class="tab-btn" onclick="switchTab('daily')">Laporan Harian</button>
+        <button class="tab-btn active" onclick="switchTab('pakan')"><i class="ph ph-bowl-food"></i> Riwayat Pakan</button>
+        <button class="tab-btn" onclick="switchTab('daily')"><i class="ph ph-chart-bar"></i> Laporan Harian</button>
     </div>
 
-    <!-- STATISTIK RINGKAS -->
     <div class="stats-grid" id="statsContainer"></div>
 
     <div id="tab-pakan" class="tab-content active">
         <div class="card">
             <div class="card-header">
-                <h2>Data Pakan Masuk</h2>
+                <h2><i class="ph ph-bowl-food" style="color:var(--primary);"></i> Data Pakan Masuk</h2>
                 <span class="card-badge" id="pakanCount">0 Data</span>
             </div>
             <div id="pakanContent">
@@ -633,7 +915,7 @@
     <div id="tab-daily" class="tab-content">
         <div class="card">
             <div class="card-header">
-                <h2>Laporan Harian & Pertumbuhan</h2>
+                <h2><i class="ph ph-chart-bar" style="color:var(--primary);"></i> Laporan Harian & Pertumbuhan</h2>
                 <span class="card-badge" id="dailyCount">0 Data</span>
             </div>
             <div id="dailyContent">
@@ -652,7 +934,7 @@
 </div>
 
 <script>
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby-E9TCCgKQU0y29q_Pr_nYaEwaQ4VKHBr1lpIMWA8tBVOx2XS-gApN_wcYoX8RPXSG/exec';
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxz7Gx8GgBzsjAJIifwnO2u5_n9bcOcPEULc2SFK-Mf10GtMIUHGtSnUWvtqrdxsZd0/exec';
     const VALID_USERNAME = 'admin';
     const VALID_PASSWORD = 'ayamberkah12';
 
@@ -772,6 +1054,7 @@
     async function loadFilterPeriode() {
         try {
             const res = await fetch(SCRIPT_URL + '?action=getPeriode');
+            if (!res.ok) throw new Error('Network response was not ok');
             const result = await res.json();
 
             if (result.status === 'success' && Array.isArray(result.data)) {
@@ -833,13 +1116,13 @@
 
         try {
             const res = await fetch(url);
+            if (!res.ok) throw new Error('Network response was not ok');
             const result = await res.json();
 
             if (result.status === 'success' && Array.isArray(result.data)) {
                 globalPakanData = result.data.filter(i => i.sheet === 'Pakan');
                 globalDailyData = result.data.filter(i => i.sheet === 'Daily');
 
-                // Load pakan info jika periode dipilih
                 if (periode) {
                     await loadPakanInfo(periode);
                 } else {
@@ -856,9 +1139,9 @@
             console.error('Error loading data:', e);
             setConnectionStatus('offline');
             document.getElementById('pakanContent').innerHTML =
-                '<div class="empty-state"><p>Gagal memuat data. Periksa koneksi internet.</p></div>';
+                '<div class="empty-state"><i class="ph ph-wifi-slash"></i><p>Gagal memuat data. Periksa koneksi internet.</p></div>';
             document.getElementById('dailyContent').innerHTML =
-                '<div class="empty-state"><p>Gagal memuat data. Periksa koneksi internet.</p></div>';
+                '<div class="empty-state"><i class="ph ph-wifi-slash"></i><p>Gagal memuat data. Periksa koneksi internet.</p></div>';
         } finally {
             btn.classList.remove('spinning');
             isLoading = false;
@@ -877,9 +1160,20 @@
         }
     }
 
+    function parseKgDashboard(kgValue) {
+        if (!kgValue) return 0;
+        
+        if (typeof kgValue === 'string') {
+            kgValue = kgValue.replace(/\./g, '');
+            kgValue = kgValue.replace(/,/g, '.');
+        }
+        
+        return parseFloat(kgValue) || 0;
+    }
+
     function renderStats() {
         const totalKg = globalPakanData.reduce((acc, curr) => {
-            const kg = parseFloat(curr.jumlah_kg) || 0;
+            const kg = parseKgDashboard(curr.jumlah_kg);
             return acc + kg;
         }, 0);
         
@@ -914,7 +1208,6 @@
             </div>
         `;
 
-        // Card Total Pakan Tersisa (hanya jika periode dipilih)
         if (selectedPeriode && globalPakanInfo) {
             statsHTML += `
                 <div class="stat-card">
@@ -1021,7 +1314,7 @@
     function renderPakanTable(data) {
         const container = document.getElementById('pakanContent');
         if (!data || data.length === 0) {
-            container.innerHTML = '<div class="empty-state"><p>Tidak ada data ditemukan</p></div>';
+            container.innerHTML = '<div class="empty-state"><i class="ph ph-tray"></i><p>Tidak ada data ditemukan</p></div>';
             return;
         }
 
@@ -1030,13 +1323,14 @@
         </tr></thead><tbody>`;
 
         data.forEach(item => {
+            const kg = parseKgDashboard(item.jumlah_kg);
             html += `<tr>
                 <td><strong>${item.tanggal || '-'}</strong></td>
                 <td><span class="badge-periode">${item.id_periode || '-'}</span></td>
                 <td>${item.sumber_pakan || '-'}</td>
                 <td>${item.no_po || '-'}</td>
                 <td>${item.jumlah_zak || '0'}</td>
-                <td style="font-weight:700; color:var(--primary);">${item.jumlah_kg || '0'} Kg</td>
+                <td style="font-weight:700; color:var(--primary);">${kg.toLocaleString('id-ID')} Kg</td>
                 <td>${item.kendaraan || '-'}</td>
                 <td>${createFotoSlider(item.dokumentasi)}</td>
             </tr>`;
@@ -1049,7 +1343,7 @@
     function renderDailyTable(data) {
         const container = document.getElementById('dailyContent');
         if (!data || data.length === 0) {
-            container.innerHTML = '<div class="empty-state"><p>Tidak ada data ditemukan</p></div>';
+            container.innerHTML = '<div class="empty-state"><i class="ph ph-clipboard-text"></i><p>Tidak ada data ditemukan</p></div>';
             return;
         }
 

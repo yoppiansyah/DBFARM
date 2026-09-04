@@ -624,7 +624,7 @@
 
 <script>
     // --- KONFIGURASI ---
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyIkN3OGzhRT25_dYSGX4RDW5hIZxuN7d-kATz6Rc1OUGbIa6D9-i8SYD1dNX--vQ/exec';
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxBHo9cdr0cs37mFmMhJunTOmSi-ljO-KT6JYeLl9r2rtH5DMlEUGXBj9kkJ6Qq4xA_/exec';
     const VALID_USERNAME = 'admin';
     const VALID_PASSWORD = 'ayamberkah12';
 
@@ -632,7 +632,6 @@
     let globalDailyData = [];
     let globalPeriodeList = [];
     let globalPakanInfo = null;
-    let globalPerformaInfo = null; // Tambahan variabel untuk menyimpan FCR & IP
     let isLoading = false;
 
     // --- FUNGSI UI KHUSUS ---
@@ -825,14 +824,8 @@
                 globalPakanData = result.data.filter(i => i.sheet === 'Pakan');
                 globalDailyData = result.data.filter(i => i.sheet === 'Daily');
 
-                // PERUBAHAN: Memanggil Data Pakan & Data Performa Aktual
-                if (periode) {
-                    await loadPakanInfo(periode);
-                    await loadPerformaInfo(periode);
-                } else { 
-                    globalPakanInfo = null; 
-                    globalPerformaInfo = null;
-                }
+                if (periode) await loadPakanInfo(periode);
+                else globalPakanInfo = null;
 
                 renderStats();
                 filterTable();
@@ -855,15 +848,6 @@
             const result = await res.json();
             if (result.status === 'success') globalPakanInfo = result.data;
         } catch (e) { console.warn('Gagal load pakan info:', e); }
-    }
-
-    // FUNGSI BARU: Load data FCR dan IP Aktual
-    async function loadPerformaInfo(periode) {
-        try {
-            const res = await fetch(SCRIPT_URL + '?action=getPerforma&periode=' + encodeURIComponent(periode));
-            const result = await res.json();
-            if (result.status === 'success') globalPerformaInfo = result.data;
-        } catch (e) { console.warn('Gagal load performa info:', e); }
     }
 
     // --- FUNGSI RENDER DASHBOARD ---
@@ -923,21 +907,6 @@
                     <div class="stat-label"><i class="ph ph-trend-up"></i> Populasi Saat Ini</div>
                     <div class="stat-value" style="color: var(--success);">${populasiSekarang.toLocaleString('id-ID')}</div>
                     <div class="stat-sub">Ekor (Mortalitas: ${mortalitas}%)</div>
-                </div>`;
-        }
-
-        // PERUBAHAN: Menambahkan Card FCR Aktual dan IP Aktual
-        if (selectedPeriode && globalPerformaInfo) {
-            statsHTML += `
-                <div class="stat-card" style="border-left: 4px solid var(--primary);">
-                    <div class="stat-label"><i class="ph ph-chart-line-up"></i> Indeks Performa (IP)</div>
-                    <div class="stat-value" style="color: var(--primary); font-size: var(--fs-xl);">${globalPerformaInfo.ip_aktual}</div>
-                    <div class="stat-sub">Target standar PT: > 300</div>
-                </div>
-                <div class="stat-card" style="border-left: 4px solid var(--warning);">
-                    <div class="stat-label"><i class="ph ph-scales"></i> FCR Aktual</div>
-                    <div class="stat-value" style="color: var(--warning); font-size: var(--fs-xl);">${globalPerformaInfo.fcr_aktual}</div>
-                    <div class="stat-sub">Rata-rata berat: ${globalPerformaInfo.rata_rata_berat_kg} Kg/Ekor</div>
                 </div>`;
         }
 
@@ -1031,16 +1000,10 @@
         container.innerHTML = html + '</tbody></table></div>';
     }
 
-    // PERUBAHAN: Konversi nilai ABW (Kg/10 ekor) menjadi gram per ekor
     function formatABW(value) {
         if (!value || value === "" || value === "0" || value === 0) return "-";
         if (typeof value === 'string' && value.match(/^\d{2}\/\d{2}\/\d{4}$/)) return "-";
-        
-        // Konversi dari Kg per 10 Ekor menjadi Gram per 1 Ekor
-        // Contoh: Input 3.2 Kg -> dibagi 10 = 0.32 Kg -> dikali 1000 = 320 gram
-        let gramPerEkor = (parseFloat(value) / 10) * 1000;
-        
-        return gramPerEkor.toFixed(0) + " g";
+        return value + " g";
     }
 
     function createFotoSlider(str) {
@@ -1074,3 +1037,5 @@
 </script>
 </body>
 </html>
+
+

@@ -385,6 +385,25 @@
         .stat-value { font-size: var(--fs-lg); font-weight: 800; line-height: 1.2; }
         .stat-sub { font-size: var(--fs-xs); color: var(--text-muted); font-weight: 600; margin-top: 4px; }
 
+        .comparison {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 8px;
+            flex-wrap: wrap;
+        }
+        .comparison .badge {
+            background: rgba(255,255,255,0.2);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+        .comparison .better { background: rgba(16, 185, 129, 0.2); color: var(--success); }
+        .comparison .worse { background: rgba(239, 68, 68, 0.2); color: var(--danger); }
+        .comparison .same { background: rgba(100, 116, 139, 0.2); color: var(--text-muted); }
+
         .tab-content { display: none; animation: fadeIn 0.3s ease; }
         .tab-content.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
@@ -409,8 +428,9 @@
 
         .slider-track { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; padding-bottom: 4px; max-width: 200px; }
         .slider-track::-webkit-scrollbar { display: none; }
-        .slider-item { width: 44px; height: 44px; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); cursor: zoom-in; flex-shrink: 0; background: #f1f5f9; display: flex; align-items: center; justify-content: center; }
-        .slider-item img { width: 100%; height: 100%; object-fit: cover; }
+        .slider-item { width: 44px; height: 44px; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); cursor: zoom-in; flex-shrink: 0; background: #f1f5f9; display: flex; align-items: center; justify-content: center; position: relative; }
+        .slider-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .slider-item .photo-count { position: absolute; bottom: 2px; right: 2px; background: rgba(0,0,0,0.7); color: white; font-size: 9px; padding: 2px 5px; border-radius: 10px; font-weight: 700; }
 
         .modal {
             display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.95); z-index: 2000;
@@ -425,6 +445,7 @@
             position: relative;
             display: flex;
             justify-content: center;
+            align-items: center;
         }
         .modal-content img {
             max-width: 100%;
@@ -608,12 +629,55 @@
     const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyr9e6uNFH47696FBZPvtwG-8posCIKxhH9Hc13gxpd-H1_rbiz5-sk1l6l1-chfk1Z/exec';
     const VALID_USERNAME = 'admin';
     const VALID_PASSWORD = 'ayamberkah12';
+    const AYAM_PER_SEKAT = 10;
 
     let globalPakanData = [];
     let globalDailyData = [];
     let globalPeriodeList = [];
     let globalPakanInfo = null;
     let isLoading = false;
+    let currentPhotoList = [];
+    let currentPhotoIndex = 0;
+
+    // --- DATA STANDAR FCR & IP ---
+    const STANDARD_DATA = [
+        { umur: 0, fcr: 0, ip: 0, bb: 40 },
+        { umur: 1, fcr: 0.333, ip: 0, bb: 54 },
+        { umur: 2, fcr: 0.569, ip: 0, bb: 71 },
+        { umur: 3, fcr: 0.73, ip: 0, bb: 92 },
+        { umur: 4, fcr: 0.845, ip: 0, bb: 117 },
+        { umur: 5, fcr: 0.929, ip: 0, bb: 145 },
+        { umur: 6, fcr: 0.993, ip: 0, bb: 177 },
+        { umur: 7, fcr: 1.047, ip: 0, bb: 210 },
+        { umur: 8, fcr: 1.072, ip: 291, bb: 252 },
+        { umur: 9, fcr: 1.099, ip: 297, bb: 297 },
+        { umur: 10, fcr: 1.122, ip: 304, bb: 345 },
+        { umur: 11, fcr: 1.141, ip: 313, bb: 398 },
+        { umur: 12, fcr: 1.151, ip: 326, bb: 457 },
+        { umur: 13, fcr: 1.161, ip: 339, bb: 520 },
+        { umur: 14, fcr: 1.171, ip: 351, bb: 586 },
+        { umur: 15, fcr: 1.18, ip: 364, bb: 657 },
+        { umur: 16, fcr: 1.192, ip: 375, bb: 731 },
+        { umur: 17, fcr: 1.203, ip: 386, bb: 808 },
+        { umur: 18, fcr: 1.216, ip: 397, bb: 889 },
+        { umur: 19, fcr: 1.229, ip: 407, bb: 973 },
+        { umur: 20, fcr: 1.242, ip: 416, bb: 1061 },
+        { umur: 21, fcr: 1.256, ip: 424, bb: 1150 },
+        { umur: 22, fcr: 1.271, ip: 432, bb: 1242 },
+        { umur: 23, fcr: 1.286, ip: 439, bb: 1337 },
+        { umur: 24, fcr: 1.302, ip: 444, bb: 1433 },
+        { umur: 25, fcr: 1.318, ip: 450, bb: 1532 },
+        { umur: 26, fcr: 1.334, ip: 455, bb: 1633 },
+        { umur: 27, fcr: 1.35, ip: 460, bb: 1736 },
+        { umur: 28, fcr: 1.367, ip: 464, bb: 1841 },
+        { umur: 29, fcr: 1.385, ip: 467, bb: 1947 },
+        { umur: 30, fcr: 1.403, ip: 469, bb: 2054 },
+        { umur: 31, fcr: 1.42, ip: 471, bb: 2162 },
+        { umur: 32, fcr: 1.438, ip: 473, bb: 2271 },
+        { umur: 33, fcr: 1.455, ip: 475, bb: 2382 },
+        { umur: 34, fcr: 1.472, ip: 476, bb: 2494 },
+        { umur: 35, fcr: 1.49, ip: 477, bb: 2605 },
+    ];
 
     // --- FUNGSI UI KHUSUS ---
     function toggleSidebar() {
@@ -645,9 +709,93 @@
         filterTable();
     }
 
+    // --- FUNGSI KONVERSI URL GOOGLE DRIVE (DIPERBAIKI) ---
+    function extractDriveFileId(url) {
+        if (!url || typeof url !== 'string') return null;
+        
+        // Bersihkan URL
+        url = url.trim();
+        
+        // Format 1: https://drive.google.com/file/d/FILE_ID/view?usp=sharing
+        let match = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+        if (match) return match[1];
+        
+        // Format 2: https://drive.google.com/open?id=FILE_ID
+        match = url.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+        if (match) return match[1];
+        
+        // Format 3: https://drive.google.com/d/FILE_ID/view
+        match = url.match(/\/d\/([a-zA-Z0-9_-]+)/);
+        if (match) return match[1];
+        
+        // Format 4: https://drive.google.com/uc?id=FILE_ID
+        match = url.match(/uc\?id=([a-zA-Z0-9_-]+)/);
+        if (match) return match[1];
+        
+        // Format 5: https://drive.google.com/thumbnail?id=FILE_ID
+        match = url.match(/thumbnail\?id=([a-zA-Z0-9_-]+)/);
+        if (match) return match[1];
+        
+        // Format 6: https://drive.google.com/uc?export=view&id=FILE_ID
+        match = url.match(/export=view&id=([a-zA-Z0-9_-]+)/);
+        if (match) return match[1];
+        
+        // Format 7: ID langsung (jika URL adalah ID murni)
+        if (url.match(/^[a-zA-Z0-9_-]{20,}$/)) return url;
+        
+        return null;
+    }
+
+    function convertToThumbnail(url) {
+        const fileId = extractDriveFileId(url);
+        if (fileId) {
+            return 'https://drive.google.com/thumbnail?id=' + fileId + '&sz=w500';
+        }
+        return url;
+    }
+
+    function convertToFullImage(url) {
+        const fileId = extractDriveFileId(url);
+        if (fileId) {
+            return 'https://drive.google.com/thumbnail?id=' + fileId + '&sz=w1920';
+        }
+        return url;
+    }
+
+    // Fungsi untuk memisahkan multiple URL foto
+    function extractPhotoUrls(str) {
+        if (!str || typeof str !== 'string') return [];
+        
+        // Coba berbagai separator
+        let urls = [];
+        
+        // Split by common separators
+        const parts = str.split(/[,\n;|]/);
+        
+        parts.forEach(part => {
+            part = part.trim();
+            
+            // Cari URL Google Drive dalam teks
+            const driveMatch = part.match(/https?:\/\/drive\.google\.com\/[^\s"'<>]+/g);
+            if (driveMatch) {
+                urls = urls.concat(driveMatch);
+            } else if (part.startsWith('http') || part.includes('drive.google.com')) {
+                urls.push(part);
+            } else if (extractDriveFileId(part)) {
+                urls.push(part);
+            }
+        });
+        
+        // Filter dan deduplicate
+        urls = urls.filter(url => url && url.length > 10);
+        urls = [...new Set(urls)];
+        
+        return urls;
+    }
+
     function openModal(url) {
-        if (!url || !url.startsWith('http')) return;
-        document.getElementById('modalImage').src = url;
+        const fullUrl = convertToFullImage(url);
+        document.getElementById('modalImage').src = fullUrl;
         document.getElementById('fotoModal').classList.add('active');
         document.body.style.overflow = 'hidden';
     }
@@ -655,9 +803,12 @@
     function closeModal(e) {
         if (e && e.target !== e.currentTarget && e.target.tagName !== 'IMG' && !e.target.closest('.modal-close')) return;
         document.getElementById('fotoModal').classList.remove('active');
-        document.body.style.overflow = ''; 
+        document.body.style.overflow = '';
     }
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(e); });
+
+    document.addEventListener('keydown', (e) => { 
+        if (e.key === 'Escape') closeModal(e); 
+    });
 
     // --- FUNGSI OTENTIKASI ---
     function handleLogin(e) {
@@ -730,48 +881,18 @@
         return parseFloat(kgValue) || 0;
     }
 
-    // --- FUNGSI KONVERSI URL FOTO ---
-    function convertToThumbnail(url) {
-        if (!url || typeof url !== 'string') return url;
-        
-        // Ekstrak file ID dari berbagai format URL Google Drive
-        let fileId = null;
-        
-        // Format: https://drive.google.com/file/d/FILE_ID/view
-        let match = url.match(/\/file\/d\/([^\/]+)/);
-        if (match) fileId = match[1];
-        
-        // Format: https://drive.google.com/open?id=FILE_ID
-        if (!fileId) {
-            match = url.match(/[?&]id=([^&]+)/);
-            if (match) fileId = match[1];
+    function parseABW(value) {
+        if (!value || value === "" || value === "0" || value === 0) return 0;
+        let num = parseFloat(value);
+        if (isNaN(num)) return 0;
+        if (num > 1000) {
+            num = num / 1000;
+            if (num > 20) {
+                num = num / 10;
+            }
         }
-        
-        // Format: https://drive.google.com/d/FILE_ID/view
-        if (!fileId) {
-            match = url.match(/\/d\/([^\/]+)/);
-            if (match) fileId = match[1];
-        }
-        
-        // Format: https://drive.google.com/uc?id=FILE_ID
-        if (!fileId) {
-            match = url.match(/uc\?id=([^&]+)/);
-            if (match) fileId = match[1];
-        }
-        
-        // Format: https://drive.google.com/thumbnail?id=FILE_ID
-        if (!fileId) {
-            match = url.match(/thumbnail\?id=([^&]+)/);
-            if (match) fileId = match[1];
-        }
-        
-        // Jika file ID ditemukan, gunakan format thumbnail
-        if (fileId) {
-            return 'https://drive.google.com/thumbnail?id=' + fileId + '&sz=w500';
-        }
-        
-        // Jika tidak bisa diekstrak, kembalikan URL asli
-        return url;
+        if (num > 100 || num < 0) return 0;
+        return num;
     }
 
     // --- FUNGSI API FETCHING ---
@@ -869,7 +990,129 @@
             const res = await fetch(SCRIPT_URL + '?action=getPakanInfo&periode=' + encodeURIComponent(periode));
             const result = await res.json();
             if (result.status === 'success') globalPakanInfo = result.data;
-        } catch (e) { console.warn('Gagal load pakan info:', e); }
+            else globalPakanInfo = null;
+        } catch (e) { console.warn('Gagal load pakan info:', e); globalPakanInfo = null; }
+    }
+
+    // --- FUNGSI PERHITUNGAN FCR & IP ---
+    function getStandardForUmur(umur) {
+        let closest = STANDARD_DATA[0];
+        for (let i = 0; i < STANDARD_DATA.length; i++) {
+            if (STANDARD_DATA[i].umur <= umur) {
+                closest = STANDARD_DATA[i];
+            } else {
+                break;
+            }
+        }
+        return closest;
+    }
+
+    function calculateAverageABW() {
+        const abwData = [];
+        
+        globalDailyData.forEach(item => {
+            const abw1 = parseABW(item.abw_sekat1);
+            const abw2 = parseABW(item.abw_sekat2);
+            const abw3 = parseABW(item.abw_sekat3);
+            const abw4 = parseABW(item.abw_sekat4);
+            
+            const validABW = [abw1, abw2, abw3, abw4].filter(val => val > 0);
+            
+            if (validABW.length > 0) {
+                const avgPerSekat = validABW.reduce((sum, val) => sum + val, 0) / validABW.length;
+                const abwPerEkorGram = (avgPerSekat / AYAM_PER_SEKAT) * 1000;
+                
+                abwData.push({
+                    tanggal: item.tanggal,
+                    usia: parseInt(item.usia || item.umur_hari) || 0,
+                    abwPerEkor: abwPerEkorGram,
+                    beratTotalPerSekat: avgPerSekat,
+                    jumlahSekat: validABW.length
+                });
+            }
+        });
+        
+        return abwData;
+    }
+
+    function getLatestABW() {
+        const abwData = calculateAverageABW();
+        if (abwData.length === 0) return null;
+        abwData.sort((a, b) => b.usia - a.usia);
+        return abwData[0];
+    }
+
+    function calculatePerformanceMetrics() {
+        const selectedPeriode = document.getElementById('filterPeriode').value;
+        if (!selectedPeriode) {
+            return { fcrAktual: null, ipAktual: null, fcrStd: null, ipStd: null, umur: null, abwAktual: null, abwStd: null };
+        }
+
+        const periodeInfo = globalPeriodeList.find(p => p.id_periode === selectedPeriode);
+        if (!periodeInfo || !periodeInfo.populasi) return null;
+
+        const populasiAwal = parseInt(periodeInfo.populasi.jumlah_awal) || 0;
+        const totalMati = parseInt(periodeInfo.populasi.total_mati) || 0;
+        const populasiSekarang = parseInt(periodeInfo.populasi.populasi_sekarang) || 0;
+
+        const totalPakanKg = globalPakanData.reduce((acc, curr) => acc + parseKgDashboard(curr.jumlah_kg), 0);
+
+        const latestABWData = getLatestABW();
+        let umur = 0;
+        let abwAktual = 0;
+
+        if (latestABWData) {
+            umur = latestABWData.usia;
+            abwAktual = latestABWData.abwPerEkor;
+        } else {
+            if (globalDailyData.length > 0) {
+                const usiaValues = globalDailyData
+                    .map(item => parseInt(item.usia || item.umur_hari) || 0)
+                    .filter(usia => usia > 0);
+                if (usiaValues.length > 0) {
+                    umur = Math.max(...usiaValues);
+                }
+            }
+            
+            if (umur === 0 && populasiAwal > 0) {
+                const tglMulai = periodeInfo.populasi.tanggal_mulai;
+                if (tglMulai) {
+                    const startDate = new Date(tglMulai);
+                    const today = new Date();
+                    umur = Math.max(0, Math.floor((today - startDate) / (1000 * 60 * 60 * 24)));
+                }
+            }
+            
+            if (umur > 0) {
+                const stdData = getStandardForUmur(umur);
+                abwAktual = stdData ? stdData.bb : 0;
+            }
+        }
+
+        const stdData = getStandardForUmur(umur);
+        const fcrStd = stdData ? stdData.fcr : null;
+        const ipStd = stdData ? stdData.ip : null;
+        const abwStd = stdData ? stdData.bb : null;
+
+        let fcrAktual = null;
+        if (totalPakanKg > 0 && populasiSekarang > 0 && abwAktual > 0) {
+            const totalBeratKg = (populasiSekarang * abwAktual) / 1000;
+            fcrAktual = totalPakanKg / totalBeratKg;
+        }
+
+        let ipAktual = null;
+        if (fcrAktual && umur > 0 && populasiAwal > 0) {
+            const survivalRate = (populasiSekarang / populasiAwal) * 100;
+            const beratKg = abwAktual / 1000;
+            ipAktual = (beratKg * survivalRate * 100) / (umur * fcrAktual);
+        }
+
+        return { 
+            fcrAktual, ipAktual, fcrStd, ipStd, umur, abwAktual, abwStd,
+            totalPakanKg, populasiAwal, populasiSekarang, totalMati,
+            survivalRate: populasiAwal > 0 ? (populasiSekarang / populasiAwal) * 100 : 0,
+            jumlahDataABW: latestABWData ? latestABWData.jumlahSekat : 0
+        };
     }
 
     // --- FUNGSI RENDER DASHBOARD ---
@@ -929,6 +1172,63 @@
                     <div class="stat-label"><i class="ph ph-trend-up"></i> Populasi Saat Ini</div>
                     <div class="stat-value" style="color: var(--success);">${populasiSekarang.toLocaleString('id-ID')}</div>
                     <div class="stat-sub">Ekor (Mortalitas: ${mortalitas}%)</div>
+                </div>`;
+        }
+
+        const metrics = calculatePerformanceMetrics();
+        if (metrics && metrics.umur > 0) {
+            let fcrComparison = '';
+            let ipComparison = '';
+
+            if (metrics.fcrAktual && metrics.fcrStd) {
+                const diff = metrics.fcrAktual - metrics.fcrStd;
+                if (diff < 0) fcrComparison = `<span class="badge better"><i class="ph ph-arrow-down"></i> Lebih Baik</span>`;
+                else if (diff > 0) fcrComparison = `<span class="badge worse"><i class="ph ph-arrow-up"></i> Lebih Buruk</span>`;
+                else fcrComparison = `<span class="badge same"><i class="ph ph-equals"></i> Sama</span>`;
+            }
+
+            if (metrics.ipAktual && metrics.ipStd) {
+                const diff = metrics.ipAktual - metrics.ipStd;
+                if (diff > 0) ipComparison = `<span class="badge better"><i class="ph ph-arrow-up"></i> Lebih Baik</span>`;
+                else if (diff < 0) ipComparison = `<span class="badge worse"><i class="ph ph-arrow-down"></i> Lebih Buruk</span>`;
+                else ipComparison = `<span class="badge same"><i class="ph ph-equals"></i> Sama</span>`;
+            }
+
+            statsHTML += `
+                <div class="stat-card" style="grid-column: span 1;">
+                    <div class="stat-label"><i class="ph ph-calculator"></i> FCR (Usia ${metrics.umur} Hari)</div>
+                    <div class="stat-value" style="color: ${metrics.fcrAktual > metrics.fcrStd ? 'var(--danger)' : 'var(--success)'};">
+                        ${metrics.fcrAktual ? metrics.fcrAktual.toFixed(3) : '-'}
+                    </div>
+                    <div class="stat-sub">
+                        Standar: ${metrics.fcrStd ? metrics.fcrStd.toFixed(3) : '-'}
+                        ${fcrComparison}
+                    </div>
+                </div>
+                <div class="stat-card" style="grid-column: span 1;">
+                    <div class="stat-label"><i class="ph ph-gauge"></i> IP (Usia ${metrics.umur} Hari)</div>
+                    <div class="stat-value" style="color: ${metrics.ipAktual > metrics.ipStd ? 'var(--success)' : 'var(--danger)'};">
+                        ${metrics.ipAktual ? metrics.ipAktual.toFixed(1) : '-'}
+                    </div>
+                    <div class="stat-sub">
+                        Standar: ${metrics.ipStd ? metrics.ipStd : '-'}
+                        ${ipComparison}
+                    </div>
+                </div>
+                <div class="stat-card" style="grid-column: span 1;">
+                    <div class="stat-label"><i class="ph ph-scale"></i> ABW Aktual vs Standar</div>
+                    <div class="stat-value">${metrics.abwAktual ? metrics.abwAktual.toFixed(0) : '-'} g</div>
+                    <div class="stat-sub">
+                        Standar: ${metrics.abwStd ? metrics.abwStd : '-'} g
+                        ${metrics.abwAktual >= metrics.abwStd ? '<span class="badge better"><i class="ph ph-arrow-up"></i> Lebih Baik</span>' : '<span class="badge worse"><i class="ph ph-arrow-down"></i> Lebih Buruk</span>'}
+                    </div>
+                </div>
+                <div class="stat-card" style="grid-column: span 1;">
+                    <div class="stat-label"><i class="ph ph-heartbeat"></i> Daya Hidup</div>
+                    <div class="stat-value" style="color: ${metrics.survivalRate > 95 ? 'var(--success)' : metrics.survivalRate > 90 ? 'var(--warning)' : 'var(--danger)'};">
+                        ${metrics.survivalRate ? metrics.survivalRate.toFixed(1) : '-'}%
+                    </div>
+                    <div class="stat-sub">Standar: >95%</div>
                 </div>`;
         }
 
@@ -1002,8 +1302,8 @@
         }
 
         let html = `<div class="table-responsive"><table><thead><tr>
-            <th>Tanggal</th><th>Usia</th><th>ABW 1</th><th>Foto</th><th>ABW 2</th><th>Foto</th>
-            <th>ABW 3</th><th>Foto</th><th>ABW 4</th><th>Foto</th><th>Mati</th><th>Foto Kematian</th>
+            <th>Tanggal</th><th>Usia</th><th>ABW 1 (10ekr)</th><th>Foto</th><th>ABW 2 (10ekr)</th><th>Foto</th>
+            <th>ABW 3 (10ekr)</th><th>Foto</th><th>ABW 4 (10ekr)</th><th>Foto</th><th>Mati</th><th>Foto Kematian</th>
         </tr></thead><tbody>`;
         data.forEach(item => {
             const mati = parseInt(item.jumlah_mati) || 0;
@@ -1025,33 +1325,32 @@
     function formatABW(value) {
         if (!value || value === "" || value === "0" || value === 0) return "-";
         if (typeof value === 'string' && value.match(/^\d{2}\/\d{2}\/\d{4}$/)) return "-";
-        return value + " g";
+        return value + " kg";
     }
 
-    // FUNGSI PERBAIKAN: Konversi URL dan tampilkan SEMUA foto
+    // --- FUNGSI FOTO SLIDER (DIPERBAIKI) ---
     function createFotoSlider(str) {
-        if (!str || typeof str !== 'string' || str.includes("Tidak ada") || str === "-") {
+        if (!str || typeof str !== 'string' || str.includes("Tidak ada") || str === "-" || str === "") {
             return '<span style="color:var(--text-muted);font-size:12px;">-</span>';
         }
         
-        // Pisahkan URL dengan berbagai separator
-        const urls = str.split(/[,\n;]/)
-            .map(u => u.trim())
-            .filter(u => u.startsWith('http') || u.includes('drive.google.com'));
+        // Ekstrak semua URL foto
+        const urls = extractPhotoUrls(str);
         
         if (urls.length === 0) {
             return '<span style="color:var(--text-muted);font-size:12px;">-</span>';
         }
         
-        // Konversi semua URL ke format thumbnail
+        // Konversi semua URL ke thumbnail
         const convertedUrls = urls.map(url => convertToThumbnail(url));
         
-        // Buat slider dengan semua foto
+        // Tampilkan slider dengan semua foto
         let html = `<div class="slider-track">`;
         convertedUrls.forEach((url, index) => {
             html += `
-            <div class="slider-item" onclick="openModal('${url}')">
-                <img src="${url}" loading="lazy" alt="Foto ${index + 1}">
+            <div class="slider-item" onclick="openModal('${url}')" title="Foto ${index + 1}">
+                <img src="${url}" loading="lazy" alt="Foto ${index + 1}" onerror="this.parentElement.innerHTML='<i class=\\'ph ph-image\\' style=\\'font-size:20px;color:var(--text-muted);\\'></i>'">
+                ${convertedUrls.length > 1 ? `<span class="photo-count">${index + 1}/${convertedUrls.length}</span>` : ''}
             </div>`;
         });
         html += `</div>`;
